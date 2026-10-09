@@ -1,6 +1,6 @@
 # ¿Le pusimos precio al Sol?
 
-Proyecto de Introducción a la Ciencia de Datos,MATCOM, Universidad de La Habana.
+Proyecto de Introducción a la Ciencia de Datos,
 
 ## Objetivo principal
 
