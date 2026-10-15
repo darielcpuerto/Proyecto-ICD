@@ -1,0 +1,14 @@
+{
+  "descripcion": "Excepciones explícitas de acceso por sitio. Cada entrada permite recolectar una fuente pese a un aviso legal detectado en su robots.txt, dejando constancia de quién autorizó la recolección y por qué.",
+  "overrides": [
+    {
+      "fuente_id": "OLP-004",
+      "fuente_nombre": "SunCar",
+      "recolectar": true,
+      "motivo": "El usuario autorizó la recolección. Las directivas de robots.txt (User-agent: * / Allow: /) la permiten; el aviso que prohíbe la recolección automatizada queda registrado en cada observación.",
+      "aviso_detectado": "recolección automatizada prohibida salvo permiso escrito del operador",
+      "autorizado_por": "usuario del proyecto",
+      "fecha": "2026-10-15"
+    }
+  ]
+}

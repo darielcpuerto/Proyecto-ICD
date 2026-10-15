@@ -1,3 +1,9 @@
 
 # Copias de seguridad locales
 openc_pro_backup_*/
+
+# Cachés y temporales de Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
