@@ -1,0 +1,22 @@
+{
+  "descripcion": "Decisiones explícitas de acceso por sitio. Cada entrada excluye una fuente de la recolección automática (`excluir: true`) o permite recolectarla pese a un aviso legal detectado en su robots.txt (`recolectar: true`), dejando constancia de quién lo decidió y por qué.",
+  "overrides": [
+    {
+      "fuente_id": "OLP-001",
+      "fuente_nombre": "Revolico",
+      "excluir": true,
+      "motivo": "Protegido por un challenge gestionado de Cloudflare (HTTP 403 en todas las rutas, incluido api.revolico.com); no es recolectable con HTTP simple. El usuario descargará sus páginas de forma manual.",
+      "autorizado_por": "usuario del proyecto",
+      "fecha": "2026-10-15"
+    },
+    {
+      "fuente_id": "OLP-004",
+      "fuente_nombre": "SunCar",
+      "recolectar": true,
+      "motivo": "El usuario autorizó la recolección. Las directivas de robots.txt (User-agent: * / Allow: /) la permiten; el aviso que prohíbe la recolección automatizada queda registrado en cada observación.",
+      "aviso_detectado": "recolección automatizada prohibida salvo permiso escrito del operador",
+      "autorizado_por": "usuario del proyecto",
+      "fecha": "2026-10-15"
+    }
+  ]
+}

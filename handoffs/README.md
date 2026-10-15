@@ -18,3 +18,5 @@ restricciones.
 
 - `2026-10-15-herramienta-recoleccion-web.md` — herramienta de recolección web y
   soporte de renderizado con Chromium.
+- `2026-10-15-reimplementacion-recoleccion.md` — reimplementación sin navegador,
+  exclusión de Revolico y recolección de datos.

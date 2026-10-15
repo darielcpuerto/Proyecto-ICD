@@ -26,8 +26,7 @@
         "availability",
         "warranty",
         "installation",
-        "description",
-        "images"
+        "description"
       ],
       "collection_notes": "Use individual advertisement pages as the primary observation unit. Preserve the original advertisement text and source URL."
     },
@@ -56,8 +55,7 @@
         "availability",
         "warranty",
         "installation",
-        "description",
-        "images"
+        "description"
       ],
       "collection_notes": "Use individual advertisement pages as the primary observation unit. Preserve the original advertisement text and source URL."
     },
@@ -85,8 +83,7 @@
         "availability",
         "warranty",
         "installation",
-        "description",
-        "images"
+        "description"
       ],
       "collection_notes": "Collect product and service pages when they contain identifiable solar offers. Preserve page URL and original descriptive text."
     },
@@ -114,8 +111,7 @@
         "availability",
         "warranty",
         "installation",
-        "description",
-        "images"
+        "description"
       ],
       "collection_notes": "Distinguish product/accessory pages from examples of installed systems. Do not treat an installed-system example as a current offer unless the page explicitly presents it as an offer."
     }
@@ -124,7 +120,7 @@
     "preserve_source_url": true,
     "preserve_access_date": true,
     "preserve_original_text": true,
-    "download_images_when_accessible": true,
+    "download_images_when_accessible": false,
     "do_not_infer_missing_values": true,
     "do_not_convert_currency_automatically": true,
     "do_not_treat_announced_availability_as_verified_stock": true,

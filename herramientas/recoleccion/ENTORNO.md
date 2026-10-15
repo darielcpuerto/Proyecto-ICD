@@ -1,119 +1,99 @@
-# Entorno y requisitos del renderizado con JavaScript
+# Entorno y estrategias de obtención sin navegador
 
 Este documento describe cómo la herramienta de recolección
-(`herramientas/recoleccion/`) obtiene páginas que se construyen en el cliente
-usando un navegador Chromium real, y qué se necesita para que ese renderizado
-funcione. Complementa, sin repetir, las bases metodológicas del proyecto y las
-reglas de `reglas/calidad-dato.md`.
+(`herramientas/recoleccion/`) obtiene el contenido de las fuentes **sin usar
+navegador**. Complementa, sin repetir, las bases metodológicas del proyecto y
+las reglas de `reglas/calidad-dato.md`.
 
-## 1. Qué navegador se usa
+La herramienta nunca lanza Chromium ni ningún otro navegador: toda obtención es
+HTTP (`GET`) con `robots.txt` respetado. Cuando un sitio construye su contenido
+en el cliente, se recurre a las estrategias descritas más abajo en lugar de
+renderizar.
 
-No se usa el navegador que Playwright descarga con `playwright install`. Se usa
-un Chromium ya presente en el sistema, indicado con `executable_path` (equivalente
-a `executable_path=` en la API de Playwright). La ruta se resuelve en este orden:
-
-1. la opción de línea de comandos `--chromium RUTA`;
-2. la variable de entorno `CHROMIUM_EXECUTABLE`;
-3. el valor por defecto `render.EJECUTABLE_POR_DEFECTO`
-   (`/opt/chromium/chrome-linux-arm64/chrome`).
-
-Si la ruta indicada no corresponde a un archivo existente, el renderizador
-lanza un error claro y la recolección continúa sin JavaScript (obtención
-estática).
-
-## 2. Requisitos
+## 1. Requisitos
 
 | Componente | Requisito verificado en este equipo |
 | --- | --- |
 | Contenedor | `proot-distro login ubuntu` |
 | Intérprete | `/root/DataScience/.venv/bin/python` (Python 3.14) |
-| Paquete | `playwright` 1.64.0 (ya instalado en el venv) |
-| Navegador | Chrome for Testing 156.0.8078.4 |
-| Ejecutable | `/opt/chromium/chrome-linux-arm64/chrome` |
+| Dependencias | solo la biblioteca estándar (`urllib`, `html.parser`, `json`, `re`) |
+| Red | salida HTTP/HTTPS directa |
 
-Instalación de referencia (no ejecutar de nuevo si ya está):
+No se instala Playwright, ni Chromium, ni ninguna dependencia de renderizado. La
+herramienta no descarga navegadores ni instala paquetes.
+
+## 2. Estrategias de obtención
+
+Todas parten de la misma base: una petición HTTP con el `User-Agent` del
+proyecto, comprobación previa de `robots.txt` y la política de acceso por sitio
+(`nucleo/politica_sitios.json`). Sobre esa base, cada sitio declara su
+estrategia en su módulo de `sitios/`:
+
+1. **HTTP simple + datos estructurados.** El HTML ya llega completo (SSR) y los
+   productos viajan en JSON-LD o en payloads incrustados (Next.js RSC /
+   `__NEXT_DATA__`). Un módulo de sitio puede combinar esas fuentes.
+2. **Descubrimiento por sitemap.** Cuando no hay una URL única que liste el
+   catálogo, las semillas se obtienen del sitemap declarado en `robots.txt`,
+   filtrando por patrones de ruta (p. ej. SunCar).
+3. **Activos declarados (SPA sin SSR).** Cuando todas las rutas devuelven la
+   misma cáscara y el contenido viaja en un recurso estático, el sitio declara
+   ese recurso como *activo*. El núcleo lo descarga, lo conserva y se lo entrega
+   al extractor (p. ej. Infinity, cuyo catálogo está en el bundle JavaScript).
+
+No se descargan imágenes: su análisis no es relevante para el proyecto.
+
+## 3. Activos (bundle JavaScript)
+
+Un SPA de Vite/Hostinger Horizons sirve la misma cáscara HTML para cualquier
+ruta; el catálogo vive en `/assets/index-*.js`. La interfaz `Sitio` expone:
+
+- `activos(html, url) -> list[str]`: URLs de recursos que el núcleo debe
+  obtener (por defecto, ninguna). Se resuelven de forma absoluta, se filtran al
+  mismo dominio y se guardan en `activos/` con nombre estable por contenido.
+- `extraer(html, texto, url, fecha, fuente, activos=None)`: recibe un mapa
+  `url_activo -> texto` para extraer datos de esos recursos.
+
+El bundle es código minificado, no JSON. El adaptador de Infinity localiza los
+arreglos de objetos declarados como `var=[{...}]` y los interpreta con un lector
+de literales JavaScript (subconjunto: objetos, arreglos, cadenas, números,
+booleanos y `null`). Solo considera catálogos los arreglos cuya forma coincide
+con la esperada (productos o accesorios); el resto se ignora.
+
+## 4. Uso
 
 ```bash
-/root/DataScience/.venv/bin/pip install playwright
+# Fase 1: descubrir semillas y escribir candidatos.jsonl
+herramientas/recoleccion/ejecutar.sh --fuente OLP-005 --descubrir
+
+# Revisar y aprobar archivos/recoleccion/OLP-005_*/candidatos.jsonl…
+# Fase 2: descargar solo los candidatos aprobados
+herramientas/recoleccion/ejecutar.sh --fuente OLP-005 --recolectar --aprobar-relevantes
 ```
 
-No hace falta `playwright install chromium` ni `install-deps`: el navegador y
-sus dependencias se toman del sistema. Este módulo no descarga navegadores ni
-instala paquetes.
+La opción `--sin-robots` desactiva la comprobación de `robots.txt` (no
+recomendado). No existe ninguna opción de renderizado.
 
-### Argumentos del navegador
+## 5. Comportamiento y limitaciones conocidas
 
-Los argumentos base son `--no-sandbox` y `--disable-dev-shm-usage`, necesarios
-en contenedores y en proot. Se pueden añadir más con la variable
-`CHROMIUM_ARGS` (separados por espacios), por ejemplo:
+- **Sin navegador.** No hay renderizado; si un sitio necesita JavaScript *de
+  forma dinámica* (datos que solo se obtienen ejecutando código, p. ej. tras un
+  *challenge* o una llamada a una API autenticada), la herramienta no puede
+  obtenerlos. En esos casos la fuente se excluye explícitamente en
+  `nucleo/politica_sitios.json` (`excluir: true`) y se documenta el motivo.
+- **Revolico está excluido.** Está protegido por un *challenge* gestionado de
+  Cloudflare (`HTTP 403` en todas las rutas, incluido su API); no es
+  recolectable con HTTP simple. Sus páginas se descargan de forma **manual** (ver
+  `archivos/recoleccion/OLP-001_revolico/manual/`).
+- **Infinity se obtiene del bundle.** Al no haber SSR, los datos se extraen del
+  bundle declarado como activo; quedan registrados con método `bundle_js`.
+- **Deduplicación por contenido.** El crudo y el texto se nombran por hash del
+  contenido; volver a obtener el mismo contenido no crea archivos nuevos ni
+  repite registros. La fecha de acceso se conserva en `manifest.jsonl`.
 
-```bash
-CHROMIUM_ARGS="--disable-gpu --single-process" \
-  herramientas/recoleccion/ejecutar.sh --fuente OLP-002
-```
+## 6. Resumen
 
-## 3. Uso
-
-```bash
-# Renderizar una fuente concreta (Playwright debe estar instalado)
-herramientas/recoleccion/ejecutar.sh --fuente OLP-002
-
-# Forzar el renderizado aunque el adaptador no lo marque, o indicar el binario
-herramientas/recoleccion/ejecutar.sh --fuente OLP-002 --render --chromium /opt/chromium/chrome-linux-arm64/chrome
-```
-
-Los adaptadores de `adaptadores.json` marcan con `"requiere_js": true` las
-fuentes cuyo contenido se construye en el cliente. La opción `--render` fuerza
-el renderizado para cualquier fuente.
-
-Antes de renderizar, cada URL sigue comprobándose contra `robots.txt`; el
-renderizado no omite esa verificación.
-
-## 4. Comportamiento y limitación conocidos
-
-Estado verificado en este equipo (proot-distro sobre Android):
-
-- `render.disponible()` devuelve `True`: Playwright está instalado.
-- El navegador **arranca**: Chromium abre el puerto de DevTools y Playwright
-  obtiene un proceso vivo con el ejecutable indicado.
-- Al crear la primera página, los procesos hijo de Chromium (servicio de red y
-  *renderer*) mueren con `SIGTRAP`; incluso `about:blank` falla. Playwright
-  informa `TargetClosedError`. El error del GPU es secundario
-  (`GPU process isn't usable. Goodbye.`).
-- Por tanto, **en este entorno no es posible obtener HTML renderizado**. La
-  herramienta lo detecta, lo informa una sola vez, cierra el navegador y
-  continúa con la obtención estática. El resultado estático de Bembete sigue
-  siendo válido: la portada y las páginas de categoría accesibles sin JS se
-  conservan con su procedencia.
-
-Combinaciones probadas (todas fallan al crear la página): `--disable-gpu`,
-`--disable-dev-shm-usage`, `--no-zygote`, `--single-process`,
-`--in-process-gpu`, `--disable-software-rasterizer`, `--ozone-platform=headless`,
-`--use-gl=disabled`, `--use-angle=swiftshader`, `--disable-features=Vulkan`,
-`--disable-gpu-compositing`, `--disable-gpu-process-crash-limit`,
-`NetworkServiceInProcess`, `NetworkServiceSandbox`, `PROOT_NO_SECCOMP=1`, entre
-otras.
-
-### Requisitos para que el renderizado funcione de verdad
-
-El renderizado con JavaScript requiere un entorno donde Chromium pueda crear
-procesos hijo (*zygote*, servicio de red y *renderer*). En la práctica:
-
-- no ejecutarlo bajo `proot`/`proot-distro` sobre Android, o
-- disponer de un kernel/host que aporte los espacios de nombres y llamadas al
-  sistema que Chromium necesita, manteniendo `--no-sandbox` por ejecutarse como
-  root.
-
-El código ya está preparado para ese caso: basta con que el ejecutable arranque
-y pueda abrir páginas; no requiere cambios, solo que el entorno lo permita.
-
-## 5. Resumen
-
-- El renderizado es **opcional y no bloqueante**: si Chromium no puede
-  renderizar, la recolección continúa de forma estática y así queda anotado en
-  los avisos de la ejecución.
-- El ejecutable del navegador se toma del sistema (no del que descarga
-  Playwright), tal como se pidió.
-- La configuración y el diagnóstico descritos arriba permiten reproducir el
-  estado actual o migrar a un entorno que sí permita el renderizado, sin
-  cambiar el código.
+- Toda la obtención es **HTTP estático**; no se usa navegador.
+- Cuando el HTML no basta, se usan **sitemaps** o **activos declarados por el
+  sitio** (bundle JavaScript).
+- Si ninguna estrategia es viable, la fuente se **excluye** con constancia de
+  quién lo decidió y por qué.
