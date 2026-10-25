@@ -20,3 +20,8 @@ restricciones.
   soporte de renderizado con Chromium.
 - `2026-10-15-reimplementacion-recoleccion.md` — reimplementación sin navegador,
   exclusión de Revolico y recolección de datos.
+- `2026-10-25-relevancia-recoleccion-100.md` — plan revisado de relevancia en
+  dos niveles, 100 anuncios de Bembete y recolección completa de SunCar e
+  Infinity.
+- `2026-10-25-recoleccion-250-validada.md` — ejecución real con 250 anuncios de
+  Bembete en 30 días, SunCar/Infinity completos, auditoría e idempotencia.

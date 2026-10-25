@@ -30,6 +30,7 @@ class Contenido:
     titulo: str = ""
     descripcion: str = ""
     texto: str = ""
+    encabezados: list[str] = field(default_factory=list)
     enlaces: list[str] = field(default_factory=list)
     advertencias: list[str] = field(default_factory=list)
 
@@ -56,6 +57,11 @@ def extraer(html: str, url_base: str) -> Contenido:
         for linea in (_texto_limpio(t) for t in cuerpo.stripped_strings)
         if linea
     )
+
+    for etiqueta in soup.find_all(("h1", "h2", "h3")):
+        texto_encabezado = _texto_limpio(etiqueta.get_text(" ", strip=True))
+        if texto_encabezado and texto_encabezado not in contenido.encabezados:
+            contenido.encabezados.append(texto_encabezado)
 
     for ancla in soup.find_all("a", href=True):
         absoluta = urljoin(url_base, ancla["href"])

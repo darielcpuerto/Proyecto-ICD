@@ -169,9 +169,15 @@ def extraer_json_ld(html: str, url: str, fecha: str, fuente: Fuente) -> list[dic
                     combinado = {**nodo, **datos_producto}
                 else:
                     combinado = nodo
-                if isinstance(combinado.get("offers"), dict):
+                ofertas = combinado.get("offers")
+                if isinstance(ofertas, dict):
                     # schema.org anida precio/moneda/disponibilidad en `offers`.
-                    combinado = {**combinado, **combinado["offers"]}
+                    identificador = ofertas.get("@id") or combinado.get("@id")
+                    combinado = {**combinado, **ofertas}
+                    if identificador:
+                        combinado["id_oferta"] = identificador
+                elif combinado.get("@id"):
+                    combinado["id_oferta"] = combinado["@id"]
                 campos, claves = _campos_desde_dict(combinado)
                 if campos:
                     registros.append(_registro(
@@ -180,6 +186,32 @@ def extraer_json_ld(html: str, url: str, fecha: str, fuente: Fuente) -> list[dic
                         campos, claves, json.dumps(nodo, ensure_ascii=False),
                     ))
     return registros
+
+
+def nombres_estructurados(html: str) -> list[str]:
+    """Nombres de productos/ofertas declarados en JSON-LD, para clasificar la página."""
+    nombres: list[str] = []
+    for bloque in re.findall(
+        r'<script[^>]*application/ld\+json[^>]*>(.*?)</script>', html, re.S | re.I
+    ):
+        try:
+            datos = json.loads(bloque)
+        except json.JSONDecodeError:
+            continue
+        nodos = datos.get("@graph", datos) if isinstance(datos, dict) else datos
+        if not isinstance(nodos, list):
+            nodos = [nodos]
+        for nodo in nodos:
+            if not isinstance(nodo, dict):
+                continue
+            if nodo.get("@type") not in ("Product", "Offer", "Service", "AggregateOffer"):
+                continue
+            nombre = nodo.get("name")
+            if not nombre and isinstance(nodo.get("itemOffered"), dict):
+                nombre = nodo["itemOffered"].get("name")
+            if isinstance(nombre, str) and nombre.strip():
+                nombres.append(nombre.strip())
+    return nombres
 
 
 # -- 2. Datos incrustados (Next.js RSC / __NEXT_DATA__) ------------------

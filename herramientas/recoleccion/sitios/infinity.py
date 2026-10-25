@@ -23,7 +23,14 @@ from urllib.parse import urlparse
 
 from ..nucleo import extraccion
 from ..nucleo.config import Fuente
-from .base import Sitio
+from .base import (
+    Candidato,
+    EvidenciaPagina,
+    OpcionesSitio,
+    Sitio,
+    TipoPagina,
+    VeredictoPagina,
+)
 
 #: Solo la portada: el SPA sirve la misma cáscara para cualquier ruta y el
 #: catálogo completo viaja en el bundle, así que basta una semilla.
@@ -265,10 +272,80 @@ class Infinity(Sitio):
     id = "OLP-005"
     nombre = "Infinity Energy Cuba"
     dominio = "infinitysolarcuba.com"
+    automatico = True
+    objetivo_paginas = None
+    unidad_objetivo = "oferta única"
     semillas_explicitas = (SEMILLA,)
     patrones_relevancia = (
         "/producto", "/tienda", "/catalogo", "/solar", "/inversor", "/panel", "/bateria",
     )
+
+    def lotes_candidatos(
+        self, fetcher, texto_robots: str | None, opciones: OpcionesSitio
+    ) -> list[list[Candidato]]:
+        urls = list(opciones.urls_semilla) or list(self.semillas_explicitas)
+        return [[
+            Candidato(url=u, tipo_esperado=TipoPagina.TECNICA, origen="semilla")
+            for u in urls
+        ]]
+
+    def tipo_por_url(self, url: str) -> TipoPagina:
+        # Todas las rutas devuelven la misma cáscara; las ofertas van en el bundle.
+        return TipoPagina.TECNICA
+
+    def clasificar_pagina(
+        self,
+        url: str,
+        tipo_esperado: TipoPagina | None,
+        evidencia: EvidenciaPagina,
+        lexico,
+    ) -> VeredictoPagina:
+        return VeredictoPagina(
+            tipo=tipo_esperado or TipoPagina.TECNICA,
+            relevante=True,
+            motivos=["cáscara técnica: el catálogo se extrae del bundle declarado"],
+        )
+
+    def tipo_pagina_registro(self, tipo: TipoPagina) -> str:
+        return TipoPagina.DATOS.value
+
+    def filtrar_registros(self, registros: list[dict], lexico):
+        """Acepta todo el catálogo del bundle y conserva producto/accesorio."""
+        aceptados: list[dict] = []
+        descartes: list[dict] = []
+        for registro in registros:
+            campos = registro.get("campos") or {}
+            nombre = str(campos.get("product_name") or "").strip()
+            if not nombre:
+                descartes.append({
+                    "registro": registro,
+                    "motivo": "registro sin product_name",
+                    "puntuacion": 0,
+                    "terminos": [],
+                })
+                continue
+            registro["relevancia"] = {
+                "relevante": True,
+                "puntuacion": 0,
+                "terminos": [],
+                "campos": [],
+                "motivo": "catálogo completo del bundle",
+            }
+            aceptados.append(registro)
+        return aceptados, descartes
+
+    def id_oferta(self, registro: dict) -> str | None:
+        adicionales = registro.get("campos_adicionales") or {}
+        identificador = adicionales.get("id_catalogo")
+        return str(identificador) if identificador else super().id_oferta(registro)
+
+    def tipo_oferta(self, registro: dict) -> str:
+        ubicacion = str(registro.get("ubicacion_evidencia") or "")
+        if "(producto)" in ubicacion:
+            return "producto"
+        if "(accesorio)" in ubicacion:
+            return "accesorio"
+        return "oferta"
 
     def activos(self, html: str, url: str) -> list[str]:
         return [m.group(1) for m in PATRON_BUNDLE.finditer(html)]

@@ -1,10 +1,2 @@
-{"url": "https://suncarsrl.com/servicios", "origen": "semilla", "relevante": true, "puntuacion": 3, "terminos": [], "motivos": ["semilla declarada por el sitio"], "incluir": true}
-{"url": "https://suncarsrl.com/ofertas", "origen": "semilla", "relevante": true, "puntuacion": 3, "terminos": [], "motivos": ["semilla declarada por el sitio"], "incluir": true}
-{"url": "https://suncarsrl.com/productos", "origen": "semilla", "relevante": true, "puntuacion": 3, "terminos": [], "motivos": ["semilla declarada por el sitio"], "incluir": true}
-{"url": "https://suncarsrl.com/tienda", "origen": "semilla", "relevante": true, "puntuacion": 3, "terminos": [], "motivos": ["semilla declarada por el sitio"], "incluir": true}
-{"url": "https://suncarsrl.com/", "origen": "enlace", "relevante": false, "puntuacion": 0, "terminos": [], "motivos": ["sin término fuerte del dominio solar"], "incluir": null}
-{"url": "https://suncarsrl.com/galeria", "origen": "enlace", "relevante": false, "puntuacion": 0, "terminos": [], "motivos": ["sin término fuerte del dominio solar"], "incluir": null}
-{"url": "https://suncarsrl.com/sobre-nosotros", "origen": "enlace", "relevante": false, "puntuacion": 0, "terminos": [], "motivos": ["sin término fuerte del dominio solar"], "incluir": null}
-{"url": "https://suncarsrl.com/testimonios", "origen": "enlace", "relevante": false, "puntuacion": 0, "terminos": [], "motivos": ["sin término fuerte del dominio solar"], "incluir": null}
-{"url": "https://suncarsrl.com/webinfo", "origen": "enlace", "relevante": false, "puntuacion": 0, "terminos": [], "motivos": ["sin término fuerte del dominio solar"], "incluir": null}
-{"url": "https://suncarsrl.com/contacto", "origen": "enlace", "relevante": false, "puntuacion": 0, "terminos": [], "motivos": ["sin término fuerte del dominio solar"], "incluir": null}
+{"url": "https://suncarsrl.com/ofertas", "url_canonica": "https://suncarsrl.com/ofertas", "origen": "sitemap", "tipo_esperado": "datos", "fecha_sitemap": null, "incluido": false, "motivo": "URL ya intentada (dedup)"}
+{"url": "https://suncarsrl.com/productos", "url_canonica": "https://suncarsrl.com/productos", "origen": "sitemap", "tipo_esperado": "datos", "fecha_sitemap": null, "incluido": false, "motivo": "URL ya intentada (dedup)"}

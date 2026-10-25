@@ -1,7 +1,9 @@
 {
-  "descripcion": "Lexicón de relevancia para decidir qué páginas merecen descargarse. Los términos de `terminos_campos` derivan de los `content_targets` del catálogo (referencias/fuentes_internet.json); los de `terminos_fuertes` son propios del dominio de oferta solar. Solo se puntúa la presencia de términos; no se infiere nada.",
-  "umbral": 3,
+  "descripcion": "Lexicón de relevancia en dos niveles. `terminos_fuertes` son propios del dominio de oferta solar y se evalúan en el campo declarado (`campo`); `terminos_campos` aportan contexto y peso. `exigir_fuerte_en` indica en qué campos del registro debe aparecer al menos un término fuerte. `terminos_negativos` son expresiones regulares sobre texto normalizado (sin acentos) para descartar falsos positivos. Solo se puntúa la presencia de términos; no se infiere nada.",
+  "umbral": 2,
   "exigir_fuerte": true,
+  "exigir_fuerte_en": ["product_name", "category", "brand"],
+  "campos_negativos": ["product_name", "category", "brand"],
   "terminos_fuertes": [
     {"termino": "panel solar", "peso": 3, "campo": "product_name"},
     {"termino": "placa solar", "peso": 3, "campo": "product_name"},
@@ -57,6 +59,25 @@
     {"termino": "fecha de publicacion", "peso": 1, "campo": "publication_date"},
     {"termino": "modelo", "peso": 1, "campo": "model"},
     {"termino": "marca", "peso": 1, "campo": "brand"}
+  ],
+  "terminos_negativos": [
+    "casa.*solar",
+    "casa en venta",
+    "apartamento",
+    "inmueble",
+    "baterias?.*(celular|movil|telefono|golf|carrito|triciclo|moto|portatil|vehiculo|carro|automovil|automotriz|camion|patineta|scooter|bici)",
+    "(celular|movil|telefono|golf|carrito|triciclo|moto|portatil|vehiculo|carro|automovil|automotriz|camion|patineta|scooter|bici).*baterias?",
+    "patinetas?",
+    "scooters?",
+    "monopatines?",
+    "bicicletas?",
+    "motos?",
+    "vehiculos?",
+    "placa.*cocina",
+    "power ?bank",
+    "alquiler",
+    "empleo",
+    "curriculum"
   ],
   "exclusiones": ["alquiler", "empleo", "curriculum"]
 }

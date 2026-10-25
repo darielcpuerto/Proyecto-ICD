@@ -107,6 +107,57 @@ class Fetcher:
         self._robots[base] = (parser, texto)
         return parser, texto
 
+    def _crawl_delay(self, url: str) -> float:
+        """Retardo declarado en ``robots.txt`` para nuestro User-Agent.
+
+        Se aplican los grupos ``Crawl-delay`` que coinciden con el agente del
+        proyecto o con ``*``. Si hay varios, se toma el mayor; un grupo
+        específico tiene prioridad sobre el genérico.
+        """
+        _, texto = self._cargar_robots(url)
+        if not texto:
+            return 0.0
+
+        grupos: list[tuple[list[str], float | None]] = []
+        agentes: list[str] = []
+        retardo: float | None = None
+        for linea in texto.splitlines():
+            linea = linea.split("#", 1)[0].strip()
+            if not linea or ":" not in linea:
+                continue
+            clave, _, valor = linea.partition(":")
+            clave = clave.strip().lower()
+            valor = valor.strip()
+            if clave == "user-agent":
+                if agentes:
+                    grupos.append((agentes, retardo))
+                agentes = [valor.lower()] if valor else []
+                retardo = None
+            elif clave == "crawl-delay" and agentes:
+                try:
+                    retardo = float(valor.replace(",", "."))
+                except ValueError:
+                    continue
+        if agentes:
+            grupos.append((agentes, retardo))
+
+        agente = self.user_agent.lower()
+        especificos: list[float] = []
+        genericos: list[float] = []
+        for nombres, valor in grupos:
+            if valor is None:
+                continue
+            for nombre in nombres:
+                if nombre == "*":
+                    genericos.append(valor)
+                elif nombre and (agente.startswith(nombre) or nombre in agente):
+                    especificos.append(valor)
+        return max(especificos or genericos or [0.0])
+
+    def retardo_efectivo(self, url: str) -> float:
+        """Retardo aplicado entre peticiones al host de ``url``."""
+        return max(float(self.delay or 0.0), self._crawl_delay(url))
+
     def _robots_de(self, url: str) -> urllib.robotparser.RobotFileParser | None:
         return self._cargar_robots(url)[0]
 
@@ -127,9 +178,10 @@ class Fetcher:
         host = urlparse(url).netloc
         ultimo = self._ultimo_acceso.get(host)
         if ultimo is not None:
+            retardo = self.retardo_efectivo(url)
             transcurrido = time.monotonic() - ultimo
-            if transcurrido < self.delay:
-                time.sleep(self.delay - transcurrido)
+            if transcurrido < retardo:
+                time.sleep(retardo - transcurrido)
 
     def obtener(self, url: str) -> Respuesta:
         """Descarga `url` y devuelve la respuesta cruda, sin transformarla."""

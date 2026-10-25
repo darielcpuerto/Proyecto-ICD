@@ -103,3 +103,48 @@ Idempotencia verificada: una segunda pasada añade 0 bytes.
 
 Estado: herramienta sin navegador y verificada; datos recolectados versionados.
 Revolico queda como descarga manual documentada.
+
+2026-10-25 — Relevancia en dos niveles y recolección de 250 anuncios
+
+Se ejecuta el plan de relevancia y recolección aprobado, con el objetivo de
+Bembete ampliado por indicación del usuario a **250 anuncios de detalle únicos
+en una ventana de 30 días** (antes 100 en 7).
+
+La herramienta pasa a una sola pasada secuencial (`--todo`): candidatos,
+prefiltro por URL, descarga de una página a la vez respetando `Crawl-delay`,
+clasificación de página, persistencia solo de páginas aceptadas, extracción,
+filtro de registros por campos y deduplicación por `id_oferta`/URL canónica. Las
+páginas y registros descartados dejan solo metadatos en `descartes.jsonl`. Se
+añade canonicalización de URL, `resumen.json` con contadores por fuente,
+ventana adaptativa de sitemaps y adaptadores específicos para Bembete, SunCar e
+Infinity. Se corrige además un fallo de escritura con surrogates aislados en
+JSON-LD.
+
+Resultado de la ejecución real: Bembete **250 anuncios** (objetivo alcanzado,
+402 intentos, 0 duplicados, 4 registros descartados) usando los sitemaps de los
+días 23, 24 y 25; SunCar **13 ofertas únicas** (13 duplicados colapsados, 5
+registros sin nombre descartados); Infinity **26 ofertas únicas** (17 productos
+y 9 accesorios). Revolico sigue excluida por Cloudflare.
+
+Después se ampliaron los patrones negativos del lexicón (patinetas, scooters,
+monopatines y baterías de vehículo) y se dejaron de aplicar a la descripción
+para no descartar kits solares que mencionan otros productos. Con confirmación
+caso por caso se eliminaron **10 anuncios** de Bembete que ya no pasaban el
+lexicón (vehículos eléctricos, bicicletas y una batería de vehículo), junto con
+su crudo y texto. El dataset final de Bembete queda en **240 registros**.
+
+En una segunda extracción sobre Bembete se añadieron **100 anuncios nuevos**
+(152 intentos, 0 duplicados) hasta 340 registros. El lexicón ampliado dejó pasar
+una «Bicicleta eléctrica nueva de litio» —no decía «batería», solo «litio»—, así
+que se añadieron `bicicletas?` y `motos?` y, con confirmación del usuario, se
+eliminó sin reponer. **Total final: 339 registros** y 343 archivos de crudo y
+texto.
+
+Auditoría: 0 registros sin `product_name`, 0 `heuristica_texto`, 0 duplicados,
+0 registros que fallen el lexicón; la muestra de 20 registros de Bembete queda
+sin ruido tras la depuración. La segunda pasada no añadió ningún registro ni
+archivo. Suite: 51 pruebas OK. El dataset anterior se eliminó a petición del
+usuario y el nuevo ocupa `archivos/recoleccion/`.
+
+Estado: herramienta implementada, lexicón ampliado, dataset de 339 registros
+auditado e idempotente; cambios listos para subir.
