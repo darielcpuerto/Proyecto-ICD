@@ -96,6 +96,7 @@ class EvidenciaPagina:
     descripcion: str = ""
     encabezados: list[str] = field(default_factory=list)
     nombres_estructurados: list[str] = field(default_factory=list)
+    texto: str = ""
 
 
 @dataclass

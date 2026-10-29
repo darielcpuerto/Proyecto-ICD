@@ -148,3 +148,36 @@ usuario y el nuevo ocupa `archivos/recoleccion/`.
 
 Estado: herramienta implementada, lexicón ampliado, dataset de 339 registros
 auditado e idempotente; cambios listos para subir.
+
+2026-10-29 — Bembete: filtro de provincias y recolección de 250 anuncios
+
+Se ajusta el adaptador de Bembete para que una página de detalle solo cuente
+si el texto generado no menciona Pinar del Río, Artemisa, Mayabeque, Matanzas,
+Cienfuegos, Ciego de Ávila, Sancti Spíritus, Villa Clara, Camagüey, Las Tunas,
+Santiago de Cuba, Holguín, Granma ni Guantánamo. La comprobación se hace sobre
+el texto normalizado antes de clasificar la página; las descartadas no guardan
+crudo ni texto, no suman al objetivo y dejan el motivo en `descartes.jsonl`. Se
+añade `EvidenciaPagina.texto` y el núcleo pasa el texto extraído; el prefiltro
+de slug sigue derivándose del lexicón.
+
+A petición del usuario se eliminó el dataset anterior de Bembete (339 registros,
+recuperable en `dbec1f3`) y se lanzó una pasada nueva con objetivo 250, ventana
+de 30 días y hasta 4.000 intentos. La primera fase (27 oct) recolectó 145
+anuncios en 1.490 intentos y quedó interrumpida por pérdida de conexión, con 9
+errores transitorios y los JSONL íntegros. Al reanudar, proot no resolvía DNS
+(`8.8.8.8` y `8.8.4.4` inaccesibles; el resolvedor de Android sí funcionaba),
+así que la herramienta cayó a `/sitemap.xml` —ya no es el índice— y terminó sin
+recolectar. Se verificó que `robots.txt` declara `sitemap-index.xml` y se añadió
+una entrada temporal en `/etc/hosts` de proot con las IPs de CloudFront; con eso
+la reanudación leyó 30 sitemaps diarios y completó la meta.
+
+Resultado: 250 anuncios válidos (145 + 105), 2.585 intentos de red en total,
+2.165 páginas descartadas por provincia, 0 errores en la reanudación y 0
+duplicados. Auditoría: 250 IDs/URLs/hashes únicos, todas las páginas de detalle
+con HTTP 200, 250 registros con nombre y precio (44 con el «1 CUP» que publica
+el sitio), 0 textos aceptados con provincia, 0 JSON inválido, 0 archivos vacíos
+y 0 registros huérfanos. Los sitemaps usados van del 23 al 29 de octubre.
+
+El resumen de la última pasada registra 105 registros nuevos; el dataset total
+es de 250. Suite del módulo: 25 pruebas OK. El trabajo de Revolico que había
+sin commitear en el árbol se dejó intacto y fuera de este commit.

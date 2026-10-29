@@ -170,7 +170,11 @@ Para cada fuente con datos aceptados:
 - **Bembete depende del sitemap diario.** La ventana es adaptativa (hasta 30
   días por defecto) y el objetivo es de hasta 250 anuncios de detalle únicos; si
   no hay 250 válidos, se recopilan todos y se reporta
-  `objetivo_alcanzado: false`.
+  `objetivo_alcanzado: false`. Un detalle solo cuenta como válido si su texto
+  **no** menciona Pinar del Río, Artemisa, Mayabeque, Matanzas, Cienfuegos,
+  Ciego de Ávila, Sancti Spíritus, Villa Clara, Camagüey, Las Tunas, Santiago
+  de Cuba, Holguín, Granma ni Guantánamo; las páginas descartadas por este
+  motivo no guardan crudo ni texto.
 - **SunCar e Infinity no tienen meta artificial.** Se recopilan todas sus ofertas
   únicas; el número puede variar respecto a capturas anteriores.
 - **Fuentes sin módulo propio** no se recolectan en `--todo`; se registran como

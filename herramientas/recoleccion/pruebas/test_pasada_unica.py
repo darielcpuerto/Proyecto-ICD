@@ -303,6 +303,39 @@ class TestPaginas(unittest.TestCase):
         )
         self.assertFalse(falsa.relevante)
 
+    def test_detalle_excluye_provincias_en_el_texto(self):
+        provincias = (
+            "Pinar del Río", "Artemisa", "Mayabeque", "Matanzas",
+            "Cienfuegos", "Ciego de Ávila", "Sancti Spíritus", "Villa Clara",
+            "Camagüey", "Las Tunas", "Santiago de Cuba", "Holguín", "Granma",
+            "Guantánamo",
+        )
+        for provincia in provincias:
+            with self.subTest(provincia=provincia):
+                veredicto = self.bembete.clasificar_pagina(
+                    "https://bembete.com/detalles/inversor-1",
+                    TipoPagina.DETALLE,
+                    EvidenciaPagina(
+                        titulo="Inversor solar",
+                        texto=f"Inversor solar. Vendedor en {provincia}.",
+                    ),
+                    self.lex,
+                )
+                self.assertFalse(veredicto.relevante)
+                self.assertIn("provincia excluida", " ".join(veredicto.motivos))
+
+    def test_detalle_acepta_texto_sin_provincia_excluida(self):
+        veredicto = self.bembete.clasificar_pagina(
+            "https://bembete.com/detalles/inversor-1",
+            TipoPagina.DETALLE,
+            EvidenciaPagina(
+                titulo="Inversor solar",
+                texto="Inversor solar con garantía. Vendedor en La Habana.",
+            ),
+            self.lex,
+        )
+        self.assertTrue(veredicto.relevante)
+
 
 class TestSitemapDiario(unittest.TestCase):
     def test_selecciona_dias_recientes_y_filtra_detalles(self):

@@ -9,7 +9,8 @@ nombre. No se aceptan precios sueltos detectados en texto.
 El prefiltro de slug evita descargar los ~2.000–3.000 detalles diarios: solo
 pasan los slugs con un término solar y sin patrones negativos (inmuebles,
 baterías de móvil/triciclo, etc.). La decisión final la toma la evaluación por
-campos del registro.
+campos del registro. Un detalle tampoco cuenta si el texto de la página menciona
+alguna de las provincias de ``PROVINCIAS_EXCLUIDAS`` (ubicación del vendedor).
 """
 
 from __future__ import annotations
@@ -53,6 +54,20 @@ def _normalizar_slug(texto: str) -> str:
     base = "".join(c for c in base if not unicodedata.combining(c))
     base = re.sub(r"[^0-9a-z]+", " ", base.lower())
     return re.sub(r"\s+", " ", base).strip()
+
+
+#: Provincias y municipios que excluyen un anuncio cuando aparecen en el texto
+#: de la página (normalmente la ubicación del vendedor). Se comparan sobre el
+#: texto normalizado (minúsculas, sin acentos) y se incluye la grafía errónea
+#: «gauntanamo» por si el sitio la publica así.
+PROVINCIAS_EXCLUIDAS = tuple(
+    _normalizar_slug(termino) for termino in (
+        "pinar", "pinar del rio", "artemisa", "mayabeque", "matanzas",
+        "cienfuegos", "ciego de avila", "sancti spiritus", "villa clara",
+        "camaguey", "las tunas", "santiago", "santiago de cuba", "holguin",
+        "granma", "guantanamo", "gauntanamo",
+    )
+)
 
 
 class Bembete(Sitio):
@@ -132,6 +147,17 @@ class Bembete(Sitio):
         tipo = tipo_esperado or self.tipo_por_url(url)
         if tipo is not TipoPagina.DETALLE:
             return super().clasificar_pagina(url, tipo, evidencia, lexico)
+        texto = _normalizar_slug(evidencia.texto)
+        for provincia in PROVINCIAS_EXCLUIDAS:
+            if provincia in texto:
+                return VeredictoPagina(
+                    tipo=tipo,
+                    relevante=False,
+                    puntuacion=0,
+                    motivos=[
+                        f"texto de la página menciona provincia excluida «{provincia}»"
+                    ],
+                )
         veredicto = lexico.evaluar_pagina(
             url=url,
             titulo=evidencia.titulo,

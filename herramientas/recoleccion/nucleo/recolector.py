@@ -463,6 +463,7 @@ class Recolector:
             descripcion=contenido.descripcion,
             encabezados=contenido.encabezados,
             nombres_estructurados=nombres,
+            texto=contenido.texto,
         )
         veredicto = sitio.clasificar_pagina(url, tipo, evidencia, self.lexico)
         hash12 = hash_contenido(respuesta.contenido)

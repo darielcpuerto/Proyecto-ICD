@@ -25,3 +25,6 @@ restricciones.
   Infinity.
 - `2026-10-25-recoleccion-250-validada.md` — ejecución real con 250 anuncios de
   Bembete en 30 días, SunCar/Infinity completos, auditoría e idempotencia.
+
+- `2026-10-29-bembete-250-provincias.md` — filtro de provincias en Bembete,
+  recolección de 250 anuncios y auditoría del dataset.
