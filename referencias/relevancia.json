@@ -28,6 +28,10 @@
     {"termino": "growatt", "peso": 3, "campo": "brand"},
     {"termino": "victron", "peso": 3, "campo": "brand"},
     {"termino": "deye", "peso": 3, "campo": "brand"},
+    {"termino": "sumry", "peso": 3, "campo": "brand"},
+    {"termino": "zeneogk", "peso": 3, "campo": "brand"},
+    {"termino": "solar play", "peso": 3, "campo": "brand"},
+    {"termino": "humsienk", "peso": 3, "campo": "brand"},
     {"termino": "kwh", "peso": 2, "campo": "capacity_kwh"},
     {"termino": "kilowatt", "peso": 2, "campo": "power_w"}
   ],

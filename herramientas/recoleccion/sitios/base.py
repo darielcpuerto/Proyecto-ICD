@@ -138,6 +138,21 @@ class Sitio:
     #: Si es False, la fuente no se recolecta automáticamente en ``--todo``.
     automatico: bool = True
 
+    # -- saneamiento y trazabilidad -------------------------------------
+    #: Si es False, el núcleo no conserva el HTML crudo de las páginas.
+    guardar_crudo: bool = True
+    #: Si es False, el núcleo no conserva el texto plano derivado.
+    guardar_texto: bool = True
+    #: Advertencias que el núcleo añade al manifiesto de cada observación.
+    advertencias_saneamiento: tuple[str, ...] = ()
+    #: Ruta (relativa a la raíz del repositorio) del lexicón propio del sitio.
+    ruta_lexico: str | None = None
+    #: Si es True, el sitio solo admite el flujo ``--todo`` (descubrimiento,
+    #: filtro, saneamiento y evidencia en una sola pasada). El flujo anterior
+    #: (``--descubrir``/``--recolectar``) guarda crudo y no aplica el
+    #: saneamiento del sitio, así que se rechaza para no filtrar PII.
+    solo_pasada_unica: bool = False
+
     # -- objetivo -------------------------------------------------------
     def objetivo(self, opciones: OpcionesSitio) -> ObjetivoFuente:
         return ObjetivoFuente(
@@ -271,6 +286,37 @@ class Sitio:
         activos: dict[str, str] | None = None,
     ) -> list[dict]:
         return extraccion.extraer(html, texto, url, fecha, fuente)
+
+    # -- saneamiento -----------------------------------------------------
+    def metadatos_pagina(
+        self, titulo: str, descripcion: str, html: str
+    ) -> tuple[str, str]:
+        """Devuelve título y descripción aptos para el manifiesto.
+
+        Un sitio con datos personales puede sobrescribirlo para redactar antes
+        de que el núcleo escriba ``manifest.jsonl``.
+        """
+        return titulo, descripcion
+
+    def url_para_manifest(self, url_solicitada: str, url_final: str) -> str:
+        """URL que se guarda en el manifiesto.
+
+        Un sitio puede devolver una forma canónica sin slug para no conservar
+        datos personales que el servidor haya podido incluir en la redirección.
+        """
+        return url_final
+
+    def evidencia(self, registro: dict) -> dict | None:
+        """Devuelve la evidencia saneada asociada a un registro, si la hay.
+
+        El adaptador puede dejar el objeto en ``registro["_evidencia"]``; este
+        gancho lo extrae para que no se escriba en ``datos.jsonl``.
+        """
+        return registro.pop("_evidencia", None)
+
+    def distribucion(self, registros: list[dict]) -> dict | None:
+        """Resumen adicional específico del sitio (por defecto, ninguno)."""
+        return None
 
     # -- compatibilidad --------------------------------------------------
     def relevante_por_patron(self, url: str) -> bool:

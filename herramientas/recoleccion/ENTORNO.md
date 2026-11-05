@@ -1,14 +1,14 @@
-# Entorno y estrategias de obtención sin navegador
+# Entorno y estrategias de obtención
 
 Este documento describe cómo la herramienta de recolección
-(`herramientas/recoleccion/`) obtiene el contenido de las fuentes **sin usar
-navegador**. Complementa, sin repetir, las bases metodológicas del proyecto y
-las reglas de `reglas/calidad-dato.md`.
+(`herramientas/recoleccion/`) obtiene el contenido de las fuentes. Complementa,
+sin repetir, las bases metodológicas del proyecto y las reglas de
+`reglas/calidad-dato.md`.
 
-La herramienta nunca lanza Chromium ni ningún otro navegador: toda obtención es
-HTTP (`GET`) con `robots.txt` respetado. Cuando un sitio construye su contenido
-en el cliente, se recurre a las estrategias descritas más abajo en lugar de
-renderizar.
+La herramienta realiza peticiones HTTP (`GET`) y respeta `robots.txt` salvo que
+el sitio lo permita o el usuario lo desactive con `--sin-robots`. Cuando un sitio
+construye su contenido en el cliente, se recurre a las estrategias descritas
+más abajo en lugar de renderizar.
 
 ## 1. Requisitos
 
@@ -16,7 +16,7 @@ renderizar.
 | --- | --- |
 | Contenedor | `proot-distro login ubuntu` |
 | Intérprete | `/root/DataScience/.venv/bin/python` (Python 3.14) |
-| Dependencias | solo la biblioteca estándar (`urllib`, `html.parser`, `json`, `re`) |
+| Dependencias | `requests` y `beautifulsoup4` (ya instaladas en el venv); el resto es biblioteca estándar (`json`, `re`, `urllib`, `html.parser`) |
 | Red | salida HTTP/HTTPS directa |
 
 No se instala Playwright, ni Chromium, ni ninguna dependencia de renderizado. La
@@ -76,6 +76,11 @@ herramientas/recoleccion/ejecutar.sh --fuente OLP-002 --todo \
 herramientas/recoleccion/ejecutar.sh --fuente OLP-004 --todo --salida archivos/recoleccion.nuevo
 herramientas/recoleccion/ejecutar.sh --fuente OLP-005 --todo --salida archivos/recoleccion.nuevo
 
+# Piloto real (solo tras confirmación explícita del usuario).
+herramientas/recoleccion/ejecutar.sh --fuente OLP-001 --todo \
+  --objetivo-paginas 300 --max-intentos 500 --delay 2 \
+  --salida archivos/recoleccion.piloto
+
 # Simulación: lee sitemaps pero no descarga páginas
 herramientas/recoleccion/ejecutar.sh --fuente OLP-002 --todo --simular
 ```
@@ -89,7 +94,9 @@ herramientas/recoleccion/ejecutar.sh --fuente OLP-005 --recolectar --aprobar-rel
 ```
 
 La opción `--sin-robots` desactiva la comprobación de `robots.txt` (no
-recomendado). No existe ninguna opción de renderizado.
+recomendado). No existe ninguna opción de renderizado obligatoria; el
+User-Agent puede ser el del proyecto o de navegador según se necesite para
+acceder al sitio.
 
 ### 4.1 Pipeline de la pasada única
 
@@ -103,7 +110,9 @@ recomendado). No existe ninguna opción de renderizado.
 5. **Clasificación de página:** tipo (`detalle`, `datos`, `lista`, `contexto`,
    `navegacion`, `tecnica`) y relevancia. Las rechazadas van a
    `descartes.jsonl` sin conservar su contenido.
-6. **Persistencia:** solo de páginas aceptadas (crudo, texto y activos).
+6. **Persistencia:** solo de páginas aceptadas. Por defecto se guardan crudo,
+   texto y activos; un sitio puede desactivarlo (`guardar_crudo`,
+   `guardar_texto`).
 7. **Extracción y filtro de registros:** se exige `product_name` y un término
    fuerte en `product_name`, `category` o `brand`; se aplican patrones negativos.
    SunCar e Infinity aceptan todo su catálogo y clasifican la oferta.
@@ -120,7 +129,9 @@ recomendado). No existe ninguna opción de renderizado.
 | `descartes.jsonl` | Descartes de nivel `pagina` o `registro`, con motivo y sin contenido completo. |
 | `candidatos.jsonl` | Candidatos generados, incluidos, prefiltrados o ya vistos. |
 | `manifest.jsonl` | Trazabilidad de cada observación; permite reconstruir el índice de dedup. |
-| `resumen.json` | Fecha, configuración, commit, hash del lexicón, contadores por fuente y objetivo alcanzado. Al ejecutar solo algunas fuentes, conserva los contadores de las que no participaron. |
+| `evidencia.jsonl` | Evidencia saneada por registro, cuando el sitio la aporta. |
+| `distribucion_municipios.json` | Conteo de anuncios aceptados por municipio, con el total y las cuotas aplicadas. |
+| `resumen.json` | Fecha, configuración, commit, hash del lexicón global en la raíz y, por fuente, el del lexicón aplicado; contadores por fuente y objetivo alcanzado. Al ejecutar solo algunas fuentes, conserva los contadores de las que no participaron. |
 
 ### 4.3 Sustitución e idempotencia
 
@@ -157,10 +168,6 @@ Para cada fuente con datos aceptados:
   *challenge* o una llamada a una API autenticada), la herramienta no puede
   obtenerlos. En esos casos la fuente se excluye explícitamente en
   `nucleo/politica_sitios.json` (`excluir: true`) y se documenta el motivo.
-- **Revolico está excluido.** Está protegido por un *challenge* gestionado de
-  Cloudflare (`HTTP 403` en todas las rutas, incluido su API); no es
-  recolectable con HTTP simple. Sus páginas se descargan de forma **manual** (ver
-  `archivos/recoleccion/OLP-001_revolico/manual/`).
 - **Infinity se obtiene del bundle.** Al no haber SSR, los datos se extraen del
   bundle declarado como activo; quedan registrados con método `bundle_js`. La
   cáscara es una página `tecnica`: no cuenta como página de oferta.
@@ -182,10 +189,14 @@ Para cada fuente con datos aceptados:
 
 ## 6. Resumen
 
-- Toda la obtención es **HTTP estático**; no se usa navegador.
+- Toda la obtención es **HTTP estático**; se puede usar el User-Agent del
+  proyecto o de navegador según se necesite para acceder al sitio.
 - Cuando el HTML no basta, se usan **sitemaps** o **activos declarados por el
   sitio** (bundle JavaScript).
 - Solo se guardan páginas de oferta; el ruido de listados y clasificados
   generales queda en `descartes.jsonl` como metadatos.
+- Cada sitio puede declarar su propio lexicón (`ruta_lexico`).
+- Los sitios con datos personales pueden desactivar el crudo/texto y aportar
+  evidencia saneada; `datos.jsonl`, `manifest.jsonl` y `evidencia.jsonl` quedan sin PII.
 - Si ninguna estrategia es viable, la fuente se **excluye** con constancia de
   quién lo decidió y por qué.

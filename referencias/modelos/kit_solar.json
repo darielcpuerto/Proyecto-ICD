@@ -1,0 +1,123 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": null
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": null
+    }
+  },
+  "tipo_oferta": "kit_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": null
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": null
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": null
+    },
+    "power_w": {
+      "tipo": "decimal",
+      "unidad": "W",
+      "valor": null
+    },
+    "capacity_kwh": {
+      "tipo": "decimal",
+      "unidad": "kWh",
+      "valor": null
+    },
+    "output_voltage": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "110V",
+        "220V",
+        "110V/220V",
+        "otro",
+        "desconocido"
+      ],
+      "valor": null
+    },
+    "componentes": {
+      "tipo": "lista<objeto>",
+      "valor": null,
+      "campos_item": {
+        "tipo_componente": {
+          "tipo": "texto",
+          "valores_permitidos": [
+            "panel",
+            "inversor",
+            "bateria",
+            "controlador",
+            "accesorio"
+          ],
+          "valor": null
+        },
+        "product_name": {
+          "tipo": "texto",
+          "valor": null
+        },
+        "brand": {
+          "tipo": "texto",
+          "valor": null
+        },
+        "quantity": {
+          "tipo": "entero",
+          "valor": null
+        },
+        "power_w": {
+          "tipo": "decimal",
+          "unidad": "W",
+          "valor": null
+        },
+        "capacity_kwh": {
+          "tipo": "decimal",
+          "unidad": "kWh",
+          "valor": null
+        }
+      }
+    }
+  }
+}

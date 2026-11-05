@@ -45,7 +45,19 @@ class Decision:
     motivo: str
     aviso_legal: str | None = None
     autorizado_por: str | None = None
+    autorizacion: dict | None = None
     advertencias: list[str] = field(default_factory=list)
+
+
+def _autorizacion(override: dict | None) -> dict | None:
+    """Resume la autorización explícita registrada en ``politica_sitios.json``."""
+    if not override or not override.get("recolectar"):
+        return None
+    return {
+        clave: override[clave]
+        for clave in ("motivo", "autorizado_por", "fecha", "aviso_detectado")
+        if override.get(clave) is not None
+    }
 
 
 def detectar_aviso(texto_robots: str | None) -> str | None:
@@ -111,6 +123,7 @@ def evaluar(
                 motivo=override.get("motivo", "excepción explícita registrada"),
                 aviso_legal=aviso,
                 autorizado_por=override.get("autorizado_por"),
+                autorizacion=_autorizacion(override),
                 advertencias=[
                     "robots.txt permite las directivas, pero incluye un aviso que "
                     "prohíbe la recolección automatizada; se recolecta por decisión "
@@ -129,5 +142,9 @@ def evaluar(
         puede_recolectar=True,
         motivo="robots.txt permite la consulta con el User-Agent del proyecto",
         aviso_legal=aviso,
+        autorizado_por=(
+            override.get("autorizado_por") if _autorizacion(override) else None
+        ),
+        autorizacion=_autorizacion(override),
         advertencias=advertencias,
     )

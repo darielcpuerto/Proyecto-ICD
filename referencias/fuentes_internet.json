@@ -3,8 +3,8 @@
   "sources": [
     {
       "id": "OLP-001",
-      "name": "Revolico",
-      "url": "https://www.revolico.com",
+      "name": "ElYerroMenu",
+      "url": "https://elyerromenu.com/",
       "category": "oferta_local_privada",
       "type": "classifieds",
       "status": "verified",
@@ -28,7 +28,7 @@
         "installation",
         "description"
       ],
-      "collection_notes": "Use individual advertisement pages as the primary observation unit. Preserve the original advertisement text and source URL."
+      "collection_notes": "Use individual advertisement pages as the primary observation unit. Preserve the source URL and the structured fields; omit seller PII and do not store raw HTML or full text."
     },
     {
       "id": "OLP-002",

@@ -12,6 +12,9 @@ Origen: sesión de planificación (Plan mode) y revisión técnica posterior.
 > registro de la planificación original; el código, la documentación y la
 > ejecución vigente usan 250/30.
 
+> **Actualización 2026-10-29 (posterior).** Revolico se abandona y se sustituye
+> por ElYerroMenu como OLP-001. Ver `journal/JOURNAL.md` (2026-10-29).
+
 > Este documento sustituye al plan que estaba en
 > `~/.opencode/plan/2026-10-25-handoff-relevancia-recoleccion-100.md`.
 > Se corrigieron las inconsistencias detectadas al contrastarlo con el código y
@@ -70,7 +73,7 @@ Comprobado contra `archivos/recoleccion/` y contra los sitemaps públicos el
 | OLP-002 Bembete | 305 registros. **239** de la portada + **48** de categorías = **287**. 18 de 6 páginas de detalle (3 por página). **60 sin `product_name`**: 48 de categorías + 12 heurísticas de detalle. Los 6 registros JSON-LD de detalle tienen nombre, precio y moneda. |
 | OLP-004 SunCar | 33 registros → **14 ofertas únicas** por ID `OF-...`; cada oferta aparece 2 veces. 5 registros solo con precio. |
 | OLP-005 Infinity | **26 ofertas** únicas (17 productos + 9 accesorios) extraídas del bundle; 16 con precio. La cáscara HTML no aporta ofertas. |
-| OLP-001 Revolico | Excluida: Cloudflare 403 en todas las rutas; descarga manual. |
+| OLP-001 ElYerroMenu | Abandonada (antes Revolico; ver actualización 2026-10-29) | — |
 
 ### Universo real de cada sitio (comprobado)
 
@@ -79,7 +82,7 @@ Comprobado contra `archivos/recoleccion/` y contra los sitemaps públicos el
 | Bembete | Sitemap diario en `/detalles/`. El 25-oct: 2.067 detalles, **230** con término solar en el slug. El 24-oct: 393/43. El 23-oct: 6.174/728. | **Sí por volumen, pero variable**; usar ventana adaptativa, no fija. |
 | SunCar | 14 ofertas únicas en 2 páginas (`/ofertas`, `/productos`) | No; recopilar todas. |
 | Infinity | 26 ofertas únicas en 1 bundle; 8 rutas devuelven la misma cáscara | No; recopilar todas. |
-| Revolico | Excluido (Cloudflare 403) | Manual. |
+| Revolico | Abandonada (Cloudflare 403); sustituida por ElYerroMenu | Manual. |
 
 ### Correcciones respecto al plan original
 
@@ -218,7 +221,7 @@ Política por sitio:
 | Bembete | Anuncio de detalle único | `objetivo_paginas = 100` | Solo `/detalles/` relevantes y únicos |
 | SunCar | Oferta única | `None` (todas) | Solo `/ofertas` y `/productos` |
 | Infinity | Oferta única | `None` (todas) | Bundle (activo); la cáscara es técnica |
-| Revolico | — | Excluido | — |
+| ElYerroMenu (antes Revolico) | — | Abandonada | — |
 
 - Bembete: ventana adaptativa de sitemaps diarios. Empezar por el día actual y
   el anterior; ampliar hasta 7 días (configurable) mientras no se alcancen 100

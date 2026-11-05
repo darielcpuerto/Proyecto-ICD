@@ -1,0 +1,83 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": null
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": null
+    }
+  },
+  "tipo_oferta": "controlador_carga",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": null
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": null
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": null
+    },
+    "controller_type": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "MPPT",
+        "PWM",
+        "otro",
+        "desconocido"
+      ],
+      "valor": null
+    },
+    "current_a": {
+      "tipo": "decimal",
+      "unidad": "A",
+      "valor": null
+    },
+    "voltage_v": {
+      "tipo": "decimal",
+      "unidad": "V",
+      "valor": null
+    }
+  }
+}

@@ -3,6 +3,10 @@
 Fecha: 2026-10-15
 Herramienta: `herramientas/recoleccion/`
 
+> **Actualización 2026-10-29.** La exclusión de Revolico que se describe abajo
+> queda obsoleta: Revolico se abandona y se sustituye por ElYerroMenu como
+> OLP-001 (`https://elyerromenu.com/`). Ver `journal/JOURNAL.md` (2026-10-29).
+
 ## Qué se hizo
 
 - Se reestructuró la herramienta en dos capas:
@@ -15,11 +19,11 @@ Herramienta: `herramientas/recoleccion/`
   (`nucleo/render.py`, `--render`, `--chromium`, `Sitio.requiere_js`). Toda la
   obtención es HTTP `GET` con `robots.txt` respetado. `ENTORNO.md` describe las
   estrategias sin navegador.
-- **Revolico (OLP-001) excluido.** Responde `HTTP 403` con
-  `cf-mitigated: challenge` en todas las rutas (incluida su API y `robots.txt`),
-  así que no es recolectable con HTTP simple. La política admite exclusiones
-  explícitas (`excluir: true`); Revolico se descarga de forma manual en
-  `archivos/recoleccion/OLP-001_revolico/manual/` (ver `LEEME.md`).
+- **OLP-001 (antes Revolico, ahora ElYerroMenu) abandonada en esa fecha.** El
+  sitio anterior respondía `HTTP 403` con `cf-mitigated: challenge` en todas las
+  rutas (incluida su API y `robots.txt`), así que no es recolectable con HTTP
+  simple sin violar las reglas del proyecto. Se sustituye por ElYerroMenu
+  (`https://elyerromenu.com/`); pendiente crear adaptador.
 - **Infinity (OLP-005) sin navegador.** El sitio es un SPA (Vite/Hostinger
   Horizons): todas las rutas devuelven la misma cáscara y el catálogo viaja en
   el bundle `/assets/index-*.js`. El `Sitio` declara ese recurso como **activo**;
@@ -62,14 +66,15 @@ herramientas/recoleccion/pruebas/probar.sh
 | OLP-002 Bembete | 10 | 0 | 305 | 4 semillas + 6 páginas de detalle aprobadas |
 | OLP-004 SunCar | 4 | 0 | 33 | semillas del sitemap (`/ofertas`, `/productos`, `/tienda`, `/servicios`) |
 | OLP-005 Infinity | 1 | 1 | 26 | 17 productos + 9 accesorios, extraídos del bundle JS |
-| OLP-001 Revolico | 0 | 0 | 0 | excluida de la recolección automática (manual) |
+| OLP-001 ElYerroMenu | 0 | 0 | 0 | abandonada (antes Revolico; ver actualización 2026-10-29) |
 
 Idempotencia verificada: una segunda pasada añade **0 bytes** (41 archivos con
 hash idéntico; 0 páginas y 0 registros nuevos).
 
 ## Pendientes / limitaciones
 
-- **Revolico**: descarga manual documentada; no hay vía HTTP simple.
+- **OLP-001 (antes Revolico, ahora ElYerroMenu)**: abandonada; no hay adaptador
+  todavía. El sitio anterior no tenía vía HTTP simple.
 - **Contenido dinámico**: sin navegador no se obtiene lo que solo aparece tras
   ejecutar código (challenges, APIs autenticadas). Si surge un caso así, se
   excluye con constancia.

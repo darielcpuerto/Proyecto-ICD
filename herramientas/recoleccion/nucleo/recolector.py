@@ -42,6 +42,7 @@ from . import extraccion, politica, relevancia
 from .almacen import Almacen, ahora_utc, git_commit, hash_contenido
 from .contenido import Contenido, es_imagen, extraer as extraer_contenido
 from .fetcher import Fetcher, Respuesta
+from .modelos import cargar_modelos
 from .urls import canonicalizar
 
 EXTENSIONES_NO_CRAWLEABLES = (".pdf", ".zip", ".rar", ".doc", ".docx", ".xls", ".xlsx")
@@ -95,6 +96,9 @@ class Contadores:
     objetivo_alcanzado: bool = False
     motivo_parada: str = ""
     ventana_sitemaps: list[str] = field(default_factory=list)
+    lexico_hash: str | None = None
+    #: La pasada se detuvo por un 403/429 (bloqueo anti-bot).
+    bloqueo_anti_bot: bool = False
 
     def contar_tipo(self, tipo: TipoPagina | None) -> None:
         clave = tipo.value if tipo else "desconocido"
@@ -126,6 +130,8 @@ class Contadores:
             "objetivo_alcanzado": self.objetivo_alcanzado,
             "motivo_parada": self.motivo_parada,
             "ventana_sitemaps": list(self.ventana_sitemaps),
+            "lexico_hash": self.lexico_hash,
+            "bloqueo_anti_bot": self.bloqueo_anti_bot,
         }
 
 
@@ -165,6 +171,32 @@ class Recolector:
         self.lexico = relevancia.cargar_lexico()
         if self.opciones.umbral_relevancia is not None:
             self.lexico.umbral = self.opciones.umbral_relevancia
+        self._lexicos: dict[str, relevancia.Lexico] = {}
+        self.modelos = cargar_modelos(RAIZ_REPOSITORIO / "referencias" / "modelos")
+
+    # -- lexicón ---------------------------------------------------------
+    def _ruta_lexico(self, sitio: Sitio) -> Path | None:
+        ruta = getattr(sitio, "ruta_lexico", None)
+        if not ruta:
+            return None
+        return RAIZ_REPOSITORIO / ruta
+
+    def _lexico_de(self, sitio: Sitio) -> relevancia.Lexico:
+        """Lexicón propio del sitio (o el global si no declara ninguno)."""
+        ruta = self._ruta_lexico(sitio)
+        if ruta is None:
+            return self.lexico
+        clave = str(ruta)
+        if clave not in self._lexicos:
+            lexico = relevancia.cargar_lexico(ruta)
+            if self.opciones.umbral_relevancia is not None:
+                lexico.umbral = self.opciones.umbral_relevancia
+            self._lexicos[clave] = lexico
+        return self._lexicos[clave]
+
+    def _hash_lexico_de(self, sitio: Sitio) -> str:
+        ruta = self._ruta_lexico(sitio)
+        return relevancia.hash_lexico(ruta) if ruta else relevancia.hash_lexico()
 
     # -- obtención ------------------------------------------------------
     def _obtener(self, url: str) -> Respuesta:
@@ -208,6 +240,8 @@ class Recolector:
         carpeta = self.almacen.carpeta_fuente(fuente.id, fuente.nombre)
         cont = Contadores(fuente_id=fuente.id, fuente_nombre=fuente.nombre)
         self.resumen.fuentes[fuente.id] = cont
+        lexico = self._lexico_de(sitio)
+        cont.lexico_hash = self._hash_lexico_de(sitio)
 
         if not getattr(sitio, "automatico", True):
             cont.omitidas_por_politica += 1
@@ -355,6 +389,7 @@ class Recolector:
                 cont.intentos_red += 1
                 self._procesar_todo(
                     fuente, sitio, candidato.url, tipo, decision, carpeta, indice, cont,
+                    lexico,
                 )
 
         if not cont.motivo_parada:
@@ -369,6 +404,9 @@ class Recolector:
                 cont.motivo_parada = (
                     f"objetivo no alcanzado: {cont.paginas_aceptadas} de {objetivo.objetivo}"
                 )
+
+        if not self.opciones.simular:
+            self._escribir_distribucion(sitio, carpeta)
 
         self.almacen.escribir_candidatos(carpeta, candidatos_registrados)
         self.resumen.candidatos += len(candidatos_registrados)
@@ -400,9 +438,11 @@ class Recolector:
         carpeta: Path,
         indice,
         cont: Contadores,
+        lexico: relevancia.Lexico,
     ) -> None:
         fecha = ahora_utc()
         respuesta = self._obtener(url)
+        url_final_man = sitio.url_para_manifest(url, respuesta.url_final)
 
         if respuesta.error == "bloqueado_por_robots.txt":
             cont.omitidas_robots += 1
@@ -412,7 +452,7 @@ class Recolector:
                 "robots.txt no permite la consulta", None, 0, [],
             )
             self.almacen.registrar(carpeta, self._registro(
-                fuente, url, respuesta.url_final, fecha, 0, "", None, None, None,
+                fuente, url, url_final_man, fecha, 0, "", None, None, None,
                 None, ["robots.txt no permite la consulta"], 0, None, decision,
                 tipo_pagina=tipo.value, aceptada=False, ids_oferta=[],
             ))
@@ -429,7 +469,7 @@ class Recolector:
                 None, 0, [],
             )
             self.almacen.registrar(carpeta, self._registro(
-                fuente, url, respuesta.url_final, fecha, respuesta.estado_http,
+                fuente, url, url_final_man, fecha, respuesta.estado_http,
                 respuesta.content_type, None, None, None, None, [error],
                 0, None, decision, tipo_pagina=tipo.value, aceptada=False,
                 error_transitorio=transitorio, ids_oferta=[],
@@ -448,7 +488,7 @@ class Recolector:
             )
             indice.anotar(url, hash12)
             self.almacen.registrar(carpeta, self._registro(
-                fuente, url, respuesta.url_final, fecha, respuesta.estado_http,
+                fuente, url, url_final_man, fecha, respuesta.estado_http,
                 respuesta.content_type, None, None, hash12, None, [motivo],
                 0, None, decision, tipo_pagina=tipo.value, aceptada=False,
                 ids_oferta=[],
@@ -457,6 +497,9 @@ class Recolector:
 
         html = self._texto(respuesta)
         contenido = extraer_contenido(html, respuesta.url_final)
+        titulo_man, descripcion_man = sitio.metadatos_pagina(
+            contenido.titulo, contenido.descripcion, html
+        )
         nombres = extraccion.nombres_estructurados(html)
         evidencia = EvidenciaPagina(
             titulo=contenido.titulo,
@@ -465,7 +508,7 @@ class Recolector:
             nombres_estructurados=nombres,
             texto=contenido.texto,
         )
-        veredicto = sitio.clasificar_pagina(url, tipo, evidencia, self.lexico)
+        veredicto = sitio.clasificar_pagina(url, tipo, evidencia, lexico)
         hash12 = hash_contenido(respuesta.contenido)
 
         if not veredicto.relevante:
@@ -478,21 +521,25 @@ class Recolector:
             )
             indice.anotar(url, hash12)
             self.almacen.registrar(carpeta, self._registro(
-                fuente, url, respuesta.url_final, fecha, respuesta.estado_http,
+                fuente, url, url_final_man, fecha, respuesta.estado_http,
                 respuesta.content_type, None, None, hash12, None,
                 [motivo] + list(decision.advertencias), 0, None, decision,
-                titulo=contenido.titulo, descripcion=contenido.descripcion,
+                titulo=titulo_man, descripcion=descripcion_man,
                 tipo_pagina=veredicto.tipo.value, aceptada=False, ids_oferta=[],
             ))
             return
 
-        # Página aceptada: solo ahora se conserva su contenido.
-        ruta_crudo, hash12, _ = self.almacen.guardar_crudo(
-            carpeta, url, respuesta.contenido
-        )
-        ruta_texto = self.almacen.guardar_texto(
-            carpeta, url, hash12, contenido.texto
-        )
+        # Página aceptada: se conserva su contenido según la política del sitio.
+        ruta_crudo = None
+        if sitio.guardar_crudo:
+            ruta_crudo, hash12, _ = self.almacen.guardar_crudo(
+                carpeta, url, respuesta.contenido
+            )
+        ruta_texto = None
+        if sitio.guardar_texto:
+            ruta_texto = self.almacen.guardar_texto(
+                carpeta, url, hash12, contenido.texto
+            )
         rutas_activos: list[str] = []
         mapa_activos = self._guardar_activos(
             sitio, carpeta, html, respuesta.url_final, rutas_activos, cont
@@ -503,11 +550,11 @@ class Recolector:
         )
         cont.registros_extraidos += len(registros)
 
-        aceptados, descartes = sitio.filtrar_registros(registros, self.lexico)
+        aceptados, descartes = sitio.filtrar_registros(registros, lexico)
         cont.registros_descartados += len(descartes)
         for descarte in descartes:
             self._descartar_registro(
-                carpeta, fuente, cont, descarte, respuesta.url_final, tipo, hash12, fecha,
+                carpeta, fuente, cont, descarte, url_final_man, tipo, hash12, fecha,
             )
 
         # La identidad debe existir antes de deduplicar; si no, todas las
@@ -524,9 +571,10 @@ class Recolector:
                     "motivo": "oferta duplicada por id_oferta/contenido",
                     "puntuacion": 0,
                     "terminos": [],
-                }, respuesta.url_final, tipo, hash12, fecha,
+                }, url_final_man, tipo, hash12, fecha,
             )
 
+        evidencias: list[dict] = []
         for registro in nuevos:
             registro["hash_contenido"] = hash12
             registro["tipo_pagina"] = sitio.tipo_pagina_registro(veredicto.tipo)
@@ -536,8 +584,17 @@ class Recolector:
             registro["availability"] = (registro.get("campos") or {}).get(
                 "availability"
             )
+            item = sitio.evidencia(registro)
+            if item:
+                item.setdefault("fuente_id", fuente.id)
+                item.setdefault("id_oferta", registro.get("id_oferta"))
+                item.setdefault("url_oferta", registro.get("url_oferta"))
+                item.setdefault("fecha_consulta", fecha)
+                evidencias.append(item)
 
-        self.almacen.registrar_datos(carpeta, nuevos)
+        self.almacen.registrar_evidencia(carpeta, evidencias)
+        datos_modelo = [self.modelos.convertir(r, r.get("tipo_oferta")) for r in nuevos]
+        self.almacen.registrar_datos(carpeta, datos_modelo)
         indice.anotar_ofertas(r["id_oferta"] for r in nuevos)
         cont.registros_aceptados += len(nuevos)
         if veredicto.cuenta and nuevos:
@@ -545,14 +602,22 @@ class Recolector:
             cont.paginas_nuevas += 1
         cont.contar_tipo(veredicto.tipo)
 
-        advertencias = list(contenido.advertencias) + list(decision.advertencias)
+        advertencias = (
+            list(contenido.advertencias)
+            + list(decision.advertencias)
+            + list(getattr(sitio, "advertencias_saneamiento", ()))
+        )
+        if not sitio.guardar_crudo:
+            advertencias.append("HTML crudo no conservado por política de saneamiento")
+        if not sitio.guardar_texto:
+            advertencias.append("texto completo no conservado por política de saneamiento")
         self.almacen.registrar(carpeta, self._registro(
-            fuente, url, respuesta.url_final, fecha, respuesta.estado_http,
+            fuente, url, url_final_man, fecha, respuesta.estado_http,
             respuesta.content_type,
-            self.almacen.ruta_relativa(ruta_crudo, self.almacen.raiz),
-            self.almacen.ruta_relativa(ruta_texto, self.almacen.raiz),
+            self.almacen.ruta_relativa(ruta_crudo, self.almacen.raiz) if ruta_crudo else None,
+            self.almacen.ruta_relativa(ruta_texto, self.almacen.raiz) if ruta_texto else None,
             hash12, None, advertencias, 0, None, decision,
-            titulo=contenido.titulo, descripcion=contenido.descripcion,
+            titulo=titulo_man, descripcion=descripcion_man,
             registros_estructurados=len(registros), activos=rutas_activos,
             tipo_pagina=veredicto.tipo.value, aceptada=True,
             ids_oferta=[r["id_oferta"] for r in nuevos],
@@ -560,6 +625,11 @@ class Recolector:
             registros_descartados=len(descartes) + len(duplicados),
             relevante_pagina=veredicto.relevante,
             puntuacion_pagina=veredicto.puntuacion,
+            evidencia_registros=len(evidencias),
+            saneamiento={
+                "crudo_conservado": bool(sitio.guardar_crudo),
+                "texto_conservado": bool(sitio.guardar_texto),
+            },
         ))
 
     def _deduplicar(self, registros: list[dict], indice) -> tuple[list[dict], list[dict]]:
@@ -590,6 +660,29 @@ class Recolector:
                 vistos_contenido.add(contenido)
             nuevos.append(registro)
         return nuevos, duplicados
+
+    # -- distribución específica del sitio -------------------------------
+    def _escribir_distribucion(self, sitio: Sitio, carpeta: Path) -> None:
+        """Escribe el resumen adicional del sitio a partir de los datos aceptados."""
+        if not hasattr(sitio, "distribucion"):
+            return
+        ruta = carpeta / "datos.jsonl"
+        registros: list[dict] = []
+        if ruta.is_file():
+            for linea in ruta.read_text(encoding="utf-8").splitlines():
+                linea = linea.strip()
+                if not linea:
+                    continue
+                try:
+                    registros.append(json.loads(linea))
+                except json.JSONDecodeError:
+                    continue
+        distribucion = sitio.distribucion(registros)
+        if distribucion is None:
+            return
+        self.almacen.escribir_json(
+            carpeta, "distribucion_municipios.json", distribucion
+        )
 
     # -- descartes -------------------------------------------------------
     def _descartar_pagina(
@@ -737,6 +830,13 @@ class Recolector:
         sitio = sitios.para_fuente(fuente)
         carpeta = self.almacen.carpeta_fuente(fuente.id, fuente.nombre)
 
+        if getattr(sitio, "solo_pasada_unica", False):
+            self.resumen.detalle.append(
+                f"{fuente.id} {fuente.nombre}: OMITIDA — requiere el flujo --todo"
+            )
+            print("  omitida: este sitio requiere el flujo --todo")
+            return
+
         if self.opciones.simular:
             semillas = self.opciones.urls_semilla or sitio.semillas_explicitas or (fuente.url,)
             for url in semillas:
@@ -845,6 +945,13 @@ class Recolector:
         sitio = sitios.para_fuente(fuente)
         carpeta = self.almacen.carpeta_fuente(fuente.id, fuente.nombre)
 
+        if getattr(sitio, "solo_pasada_unica", False):
+            self.resumen.detalle.append(
+                f"{fuente.id} {fuente.nombre}: OMITIDA — requiere el flujo --todo"
+            )
+            print("  omitida: este sitio requiere el flujo --todo")
+            return
+
         decision = self._evaluar_politica(fuente)
         if not decision.puede_recolectar:
             self.resumen.omitidas_por_politica += 1
@@ -898,6 +1005,11 @@ class Recolector:
         padre: str | None = None,
     ) -> tuple[bool, Contenido | None]:
         """Obtiene, conserva y analiza una URL. Devuelve (ok, contenido)."""
+        if getattr(sitio, "solo_pasada_unica", False):
+            # Salvaguarda: este flujo guarda crudo y no aplica el saneamiento
+            # del sitio; no debe usarse con fuentes que puedan contener PII.
+            print("  omitida: este sitio requiere el flujo --todo")
+            return False, None
         fecha = ahora_utc()
         respuesta = self._obtener(url)
 
@@ -1029,6 +1141,7 @@ class Recolector:
                 "motivo": decision.motivo,
                 "aviso_legal": decision.aviso_legal,
                 "autorizado_por": decision.autorizado_por,
+                "autorizacion": decision.autorizacion,
             },
             "reglas_aplicadas": self.config.reglas_globales,
             "metodo_obtencion": self._metodo_obtencion(),

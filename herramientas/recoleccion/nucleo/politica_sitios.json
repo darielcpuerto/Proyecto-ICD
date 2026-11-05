@@ -1,13 +1,13 @@
 {
-  "descripcion": "Decisiones explícitas de acceso por sitio. Cada entrada excluye una fuente de la recolección automática (`excluir: true`) o permite recolectarla pese a un aviso legal detectado en su robots.txt (`recolectar: true`), dejando constancia de quién lo decidió y por qué.",
+  "descripcion": "Decisiones explícitas de acceso por sitio. Cada entrada excluye una fuente de la recolección automática (`excluir: true`) o permite recolectarla (`recolectar: true`), sea para atender un aviso legal de robots.txt o para dejar constancia de una autorización explícita, indicando quién lo decidió y por qué.",
   "overrides": [
     {
       "fuente_id": "OLP-001",
-      "fuente_nombre": "Revolico",
-      "excluir": true,
-      "motivo": "Protegido por un challenge gestionado de Cloudflare (HTTP 403 en todas las rutas, incluido api.revolico.com); no es recolectable con HTTP simple. El usuario descargará sus páginas de forma manual.",
+      "fuente_nombre": "ElYerroMenu",
+      "recolectar": true,
+      "motivo": "El usuario autorizó la recolección el 2026-10-25. Se recolecta solo para análisis agregado: 2 s entre peticiones, sin paralelismo, sin republicar textos, sin datos personales.",
       "autorizado_por": "usuario del proyecto",
-      "fecha": "2026-10-15"
+      "fecha": "2026-10-25"
     },
     {
       "fuente_id": "OLP-004",

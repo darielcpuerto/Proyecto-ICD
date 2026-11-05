@@ -41,9 +41,14 @@ class TestRegistro(unittest.TestCase):
         self.assertEqual(sitios.obtener("OLP-004").nombre, "SunCar")
         self.assertEqual(sitios.obtener("OLP-005").nombre, "Infinity Energy Cuba")
 
-    def test_revolico_no_tiene_modulo(self):
-        # Revolico se recolecta a mano (excluida en la política).
-        self.assertIsNone(sitios.obtener("OLP-001"))
+    def test_olp001_tiene_modulo(self):
+        sitio = sitios.obtener("OLP-001")
+        self.assertIsNotNone(sitio)
+        self.assertEqual(sitio.nombre, "ElYerroMenu")
+        # No se conserva contenido completo: solo campos y evidencia saneada.
+        self.assertFalse(sitio.guardar_crudo)
+        self.assertFalse(sitio.guardar_texto)
+        self.assertTrue(sitio.solo_pasada_unica)
 
     def test_fuente_desconocida_usa_generico(self):
         f = fuente("OLP-999", "Otra", "https://otra.test")

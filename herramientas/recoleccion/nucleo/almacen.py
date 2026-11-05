@@ -10,6 +10,7 @@ Estructura creada bajo el directorio de salida (por defecto ``archivos/``)::
         descartes.jsonl   páginas/registros rechazados, con motivo
         manifest.jsonl    una línea JSON por observación (trazabilidad)
         datos.jsonl       registros estructurados aceptados
+        evidencia.jsonl   evidencia saneada por registro (si el sitio la aporta)
     <salida>/resumen.json resumen de la ejecución por fuente y total
 
 Deduplicación
@@ -248,6 +249,27 @@ class Almacen:
         with (carpeta / "datos.jsonl").open("a", encoding="utf-8") as archivo:
             for registro in registros:
                 archivo.write(_json(registro) + "\n")
+
+    @staticmethod
+    def ruta_evidencia(carpeta: Path) -> Path:
+        return carpeta / "evidencia.jsonl"
+
+    def registrar_evidencia(self, carpeta: Path, registros: list[dict]) -> None:
+        """Añade evidencia saneada al archivo ``evidencia.jsonl`` de la fuente."""
+        if not registros:
+            return
+        with self.ruta_evidencia(carpeta).open("a", encoding="utf-8") as archivo:
+            for registro in registros:
+                archivo.write(_json(registro) + "\n")
+
+    def escribir_json(self, carpeta: Path, nombre: str, datos: dict) -> Path:
+        """Escribe un JSON determinista dentro de la carpeta de la fuente."""
+        destino = carpeta / nombre
+        destino.write_text(
+            _json(datos, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
+        return destino
 
     # -- candidatos (puerta de relevancia) ------------------------------
     @staticmethod

@@ -8,6 +8,9 @@ Origen: ejecución del plan `2026-10-25-relevancia-recoleccion-100.md`, con el
 objetivo de Bembete ampliado por indicación del usuario a **250 anuncios en 30
 días**.
 
+> **Actualización 2026-10-29 (posterior).** Revolico se abandona y se sustituye
+> por ElYerroMenu como OLP-001. Ver `journal/JOURNAL.md` (2026-10-29).
+
 ---
 
 ## 1. Qué se hizo
@@ -36,7 +39,7 @@ días**.
 | Bembete (2.ª extracción) | Añadir 100 anuncios nuevos | **+100 recolectados; 339 finales tras depurar 1 bicicleta** |
 | SunCar | Todas las ofertas únicas | **13** |
 | Infinity | Todas las ofertas únicas | **26** (17 productos + 9 accesorios) |
-| Revolico | Excluida (Cloudflare 403) | Omitida |
+| ElYerroMenu (antes Revolico) | Abandonada (ver actualización 2026-10-29) | Omitida |
 
 La ventana de sitemaps usada fue 2026-10-23 a 2026-10-25 (3 sitemaps diarios),
 con 402 intentos de red y 500 como límite.

@@ -10,6 +10,11 @@ Estado del repositorio: **sin commit** por esta sesión. `git status`:
 Este documento vive en `handoffs/`. Convención de nombre:
 `AAAA-MM-DD-tema.md` (véase `handoffs/README.md`).
 
+> **Actualización 2026-10-29.** Este handoff describe la etapa con navegador y
+> el diagnóstico antiguo de Revolico. Ya no está vigente: Revolico se abandona
+> por bloqueo de Cloudflare y se sustituye por ElYerroMenu como OLP-001
+> (`https://elyerromenu.com/`). Ver `journal/JOURNAL.md` (2026-10-29).
+
 ## 1. Objetivo
 
 Construir, por fases, una herramienta en Python que recolecte y preserve la
@@ -48,7 +53,7 @@ anunciada de stock verificado, no tratar resultados de buscadores como dato).
 | `sitemap.py` + `adaptadores.py` + `adaptadores.json` | Semillas por sitemap/patrones/explícitas y `requiere_js` |
 | `extractor.py` | Contenido observable de una página (título, texto, imágenes, enlaces) |
 | `extraccion.py` | JSON‑LD, datos incrustados (Next.js) y heurística de precios |
-| `extractores.py` | Adaptadores de sitio (`revolico`, `bembete`) |
+| `extractores.py` | Adaptadores de sitio (antes `revolico`, `bembete`; ahora solo `bembete`) |
 | `render.py` | Renderizado JS opcional con Chromium del sistema |
 | `recolector.py` | Orquestación por fuente, fallback estático, manifiesto |
 | `storage.py` | Salida en `archivos/recoleccion/<ID>_<slug>/` |
@@ -78,7 +83,7 @@ otro venv ni reinstalar dependencias.
   está).
 - Salida acumulada en `archivos/recoleccion/` (líneas de `datos.jsonl`
   **acumuladas entre corridas**, no únicas):
-  - `OLP-001_revolico` — 359
+  - `OLP-001_ElYerroMenu` — (antes Revolico, abandonada por bloqueo de Cloudflare; pendiente adaptador)
   - `OLP-002_bembete` — 3118
   - `OLP-004_suncar` — 57
 - Render: `disponible()=True`, ejecutable resuelto
@@ -111,8 +116,9 @@ fallan. Consecuencia: los listados de categoría de Bembete y el SPA de Infinity
    `.venv`, temporales) sin excluir documentación ni datos importantes.
    Revisar `archivos/` antes de tocar; el `.gitignore` actual solo ignora copias
    de seguridad locales.
-2. Revisar las **semillas de Revolico**: hoy devuelven `403` (problema del
-   sitio, no de la herramienta) y OLP‑001 puede quedar en 0 páginas.
+2. Revisar las **semillas de ElYerroMenu** (antes Revolico): el sitio anterior
+   devolveba `403` (problema del sitio, no de la herramienta) y OLP‑001 puede
+   quedar en 0 páginas hasta que se cree un adaptador para ElYerroMenu.
 3. Decidir el destino del render JS: dejarlo documentado como limitación o
    migrar la ejecución a un entorno que permita procesos de Chromium.
 4. Valorar un adaptador para **Infinity (OLP‑005)** cuando haya render disponible.

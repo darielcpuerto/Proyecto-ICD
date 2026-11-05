@@ -10,11 +10,12 @@ from __future__ import annotations
 from ..nucleo.config import Fuente
 from .base import Sitio, SitioGenerico
 from .bembe import SITIO as BEMBETE
+from .elyerromenu import SITIO as ELYERROMENU
 from .infinity import SITIO as INFINITY
 from .suncar import SITIO as SUNCAR
 
 REGISTRO: dict[str, Sitio] = {
-    sitio.id: sitio for sitio in (BEMBETE, SUNCAR, INFINITY)
+    sitio.id: sitio for sitio in (ELYERROMENU, BEMBETE, SUNCAR, INFINITY)
 }
 
 

@@ -138,6 +138,31 @@ class Lexico:
         haystack = " ".join(normalizados.values())
         return self._puntuar(campos=normalizados, haystack=haystack)
 
+    def exclusion(self, campos_registro: dict) -> str | None:
+        """Devuelve el patrón negativo que excluye el registro, si lo hay.
+
+        Se expone para que un adaptador pueda aplicar reglas propias (por
+        ejemplo, «panel» + especificación) sin aceptar un registro que el
+        lexicón ya excluyó por inmueble, accesorio o batería de vehículo.
+        """
+        normalizados = {
+            clave: _normalizar(str(valor))
+            for clave, valor in (campos_registro or {}).items()
+            if valor not in (None, "", [], {})
+        }
+        haystack = " ".join(normalizados.values())
+        return self._patron_negativo(normalizados, haystack)
+
+    def _patron_negativo(self, campos: dict[str, str], haystack: str) -> str | None:
+        """Busca patrones negativos en los campos declarados para ello."""
+        haystack_negativos = " ".join(
+            campos.get(campo, "") for campo in self.campos_negativos
+        ).strip() or haystack
+        for patron in self.negativos:
+            if patron.search(haystack_negativos):
+                return patron.pattern
+        return None
+
     # -- núcleo ----------------------------------------------------------
     def _puntuar(
         self,
@@ -155,9 +180,6 @@ class Lexico:
             self.exigir_fuerte_en if exigir_fuerte_en is True else
             exigir_fuerte_en if exigir_fuerte_en else ()
         )
-        haystack_negativos = " ".join(
-            campos.get(campo, "") for campo in self.campos_negativos
-        ).strip() or haystack
 
         for tipo, entradas in (("fuerte", self.fuertes), ("contexto", self.campos)):
             for entrada in entradas:
@@ -198,10 +220,10 @@ class Lexico:
                 if len(_normalizar(str(e.get("termino", "")))) >= 3
             )
 
-        for patron in self.negativos:
-            if patron.search(haystack_negativos):
-                motivos.append(f"excluido por patrón negativo «{patron.pattern}»")
-                return Veredicto(False, 0, terminos, motivos, campos_coincidentes)
+        patron = self._patron_negativo(campos, haystack)
+        if patron:
+            motivos.append(f"excluido por patrón negativo «{patron}»")
+            return Veredicto(False, 0, terminos, motivos, campos_coincidentes)
 
         cumple_umbral = puntuacion >= self.umbral
         if self.exigir_fuerte and not hay_fuerte:

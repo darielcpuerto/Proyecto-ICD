@@ -149,6 +149,43 @@ usuario y el nuevo ocupa `archivos/recoleccion/`.
 Estado: herramienta implementada, lexicón ampliado, dataset de 339 registros
 auditado e idempotente; cambios listos para subir.
 
+2026-10-25 — Herramienta de Revolico (OLP-001), implementada y no ejecutada
+
+Se implementa el plan de viabilidad de Revolico aprobado en el handoff
+`handoffs/2026-10-25-revolico-viabilidad.md`. El diagnóstico anterior cambia:
+el `403` general era el filtro anti-bot contra agentes genéricos; con el
+`User-Agent` honesto del proyecto el sitio responde `200`. La API
+`api.revolico.com` sigue bloqueada y no se usa. El usuario autorizó la
+recolección para análisis agregado, con 2 s entre peticiones, sin paralelismo,
+sin republicar textos, sin datos personales y deteniéndose ante cualquier
+`403`/`429`; no se usa User-Agent de navegador ni se rotan IPs.
+
+Se crea el adaptador `sitios/revolico.py`: descubre por los 15 municipios de La
+Habana desde `__NEXT_DATA__`/Apollo (`adsPerPage(...)`), entrega candidatos en
+rondas (20 iniciales, buffer 25, techo 30 por municipio), usa `/item/{id}` y
+extrae el `AdType`. Se añade el lexicón propio
+`referencias/relevancia_revolico.json` (solar estricto, separado del global) y
+la regla «panel/módulo + W, bifacial, monocristalino…». Se registran las marcas
+`sumry`, `zeneogk`, `solar play` y `humsienk` en los lexicones.
+
+El núcleo incorpora lexicón por sitio, `guardar_crudo`/`guardar_texto`,
+saneamiento de metadatos, evidencia por registro y `distribucion_municipios.json`.
+Revolico no conserva HTML crudo ni texto: `datos.jsonl`, `manifest.jsonl` y
+`evidencia.jsonl` quedan sin nombre, teléfono, email ni identificadores del
+vendedor; la descripción y el título se redactan. La URL del manifiesto se
+reduce a `/item/{id}` para no conservar slugs que puedan incluir un teléfono.
+Se retira la exclusión de `politica_sitios.json` y se documenta la autorización
+en `Decision`. El flujo anterior (`--descubrir`/`--recolectar`) se rechaza para
+OLP-001 porque guardaría crudo y no aplicaría el saneamiento: solo se admite
+`--todo`.
+
+Verificación offline con muestras reales: listado de 100 anuncios, detalle solar
+extraído con precio numérico y saneado, y detalle no solar descartado. Suite de
+**72 pruebas OK**. No se ejecutó la simulación ni el piloto: quedan pendientes de
+confirmación del usuario.
+
+Estado: herramienta implementada y probada; sin ejecución real ni commit.
+
 2026-10-29 — Bembete: filtro de provincias y recolección de 250 anuncios
 
 Se ajusta el adaptador de Bembete para que una página de detalle solo cuente
@@ -181,3 +218,38 @@ y 0 registros huérfanos. Los sitemaps usados van del 23 al 29 de octubre.
 El resumen de la última pasada registra 105 registros nuevos; el dataset total
 es de 250. Suite del módulo: 25 pruebas OK. El trabajo de Revolico que había
 sin commitear en el árbol se dejó intacto y fuera de este commit.
+
+2026-10-29 — Abandono de Revolico (OLP-001) y sustitución por ElYerroMenu
+
+Se abandona la recolección de Revolico (OLP-001) por bloqueo persistente de
+Cloudflare (403 con `Cf-Mitigated: challenge` en todas las rutas, incluyendo
+`robots.txt` y `sitemap.xml`), que no podía resolverse sin violar las reglas del
+proyecto (sin User-Agent de navegador, sin rotar IPs, sin resolver desafíos
+JavaScript).
+
+Se sustituye Revolico por **ElYerroMenu** (`https://elyerromenu.com/`) como
+fuente OLP-001 en `referencias/fuentes_internet.json` y
+`herramientas/recoleccion/nucleo/politica_sitios.json`. El id de la fuente se
+mantiene como `OLP-001`.
+
+Se eliminan todos los archivos específicos de Revolico:
+- `herramientas/recoleccion/sitios/revolico.py` (adaptador)
+- `herramientas/recoleccion/pruebas/test_revolico.py` (pruebas del adaptador)
+- `referencias/relevancia_revolico.json` (lexicón propio)
+- `handoffs/2026-10-25-revolico-viabilidad.md` (plan de viabilidad)
+- `herramientas/recoleccion/pruebas/test_cookies_manual.py` (prueba de cookies)
+- `archivos/recoleccion/OLP-001_revolico/` (datos previos)
+
+Se remueve la entrada de Revolico del registro de sitios en
+`herramientas/recoleccion/sitios/__init__.py`. OLP-001 ahora usa el sitio
+genérico (`SitioGenerico`) hasta que se cree un adaptador específico para
+ElYerroMenu (pendiente).
+
+Se actualiza `herramientas/recoleccion/ENTORNO.md` eliminando todas las
+referencias a Revolico. Se actualiza `herramientas/recoleccion/pruebas/test_sitios.py`
+para que `test_olp001_usa_sitio_genérico` verifique que OLP-001 no tiene módulo
+especializado.
+
+Estado: Revolico abandonada; ElYerroMenu registrada como OLP-001 sin módulo
+especializado todavía; se debe crear el adaptador de ElYerroMenu cuando se
+decida proceder con su recolección.
