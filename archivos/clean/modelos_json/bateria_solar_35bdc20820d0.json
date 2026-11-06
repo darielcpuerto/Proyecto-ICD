@@ -1,0 +1,95 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": "https://bembete.com/detalles/bateria-infinity-solar-de-15-kwh-inter-pv-55201601-con-1859128428597501fb"
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": "Bembete (bembete.com)"
+    }
+  },
+  "tipo_oferta": "bateria_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": "https://bembete.com/detalles/bateria-infinity-solar-de-15-kwh-inter-pv-55201601-con-1859128428597501fb#offer"
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": "Bateria infinity solar de 15 kwh"
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": "Infinity Solar"
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": "kwh"
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": 2750.0
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": "2750 usd"
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": "USD"
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": "La Habana"
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": "2026-10-26T13:54:16Z"
+    },
+    "capacity_kwh": {
+      "tipo": "decimal",
+      "unidad": "kWh",
+      "valor": 15.0
+    },
+    "capacity_ah": {
+      "tipo": "decimal",
+      "unidad": "Ah",
+      "valor": null
+    },
+    "voltage_v": {
+      "tipo": "decimal",
+      "unidad": "V",
+      "valor": null
+    },
+    "battery_technology": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "LiFePO4",
+        "litio",
+        "AGM",
+        "gel",
+        "plomo-acido",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "desconocido"
+    },
+    "cycles": {
+      "tipo": "entero",
+      "valor": null
+    }
+  }
+}

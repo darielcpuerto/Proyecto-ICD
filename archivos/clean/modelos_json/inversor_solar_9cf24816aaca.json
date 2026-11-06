@@ -1,0 +1,95 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": "https://bembete.com/detalles/bateria-de-5k-48v-infinisolar-1250usd-inversor-6k-48v-infinisolar-800usd-1124220816893019fb"
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": "Bembete (bembete.com)"
+    }
+  },
+  "tipo_oferta": "inversor_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": "https://bembete.com/detalles/bateria-de-5k-48v-infinisolar-1250usd-inversor-6k-48v-infinisolar-800usd-1124220816893019fb#offer"
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": "Batería 5k 48v Infinisolar y Inverter 6k 48v Infinisolar"
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": "Infinisolar"
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": "Inverter"
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": 1250.0
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": "1250 usd"
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": "USD"
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": "La Habana"
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": "2026-10-26T01:26:15Z"
+    },
+    "power_w": {
+      "tipo": "decimal",
+      "unidad": "W",
+      "valor": null
+    },
+    "inverter_type": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "hibrido",
+        "off-grid",
+        "on-grid",
+        "microinversor",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "desconocido"
+    },
+    "output_voltage": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "110V",
+        "220V",
+        "110V/220V",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "desconocido"
+    },
+    "mppt": {
+      "tipo": "booleano",
+      "valor": false
+    }
+  }
+}

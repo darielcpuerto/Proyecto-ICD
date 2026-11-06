@@ -1,0 +1,95 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": "https://bembete.com/detalles/venta-de-energia-inversor-hibrido-sumry-4kw-350-inversor-2315772349264756fb"
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": "Bembete (bembete.com)"
+    }
+  },
+  "tipo_oferta": "inversor_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": "https://bembete.com/detalles/venta-de-energia-inversor-hibrido-sumry-4kw-350-inversor-2315772349264756fb#offer"
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": "Inversores y baterías de energía"
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": "precio350"
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": 350.0
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": "350 cup"
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": "CUP"
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": "La Habana"
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": "2026-10-24T19:24:45Z"
+    },
+    "power_w": {
+      "tipo": "decimal",
+      "unidad": "W",
+      "valor": null
+    },
+    "inverter_type": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "hibrido",
+        "off-grid",
+        "on-grid",
+        "microinversor",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "desconocido"
+    },
+    "output_voltage": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "110V",
+        "220V",
+        "110V/220V",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "desconocido"
+    },
+    "mppt": {
+      "tipo": "booleano",
+      "valor": false
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": "https://bembete.com/detalles/soy-prima-mano-bateria-lifepo4-de-12v-200ah-en-2662344797527207fb"
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": "Bembete (bembete.com)"
+    }
+  },
+  "tipo_oferta": "inversor_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": "https://bembete.com/detalles/soy-prima-mano-bateria-lifepo4-de-12v-200ah-en-2662344797527207fb#offer"
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": "Batería lifepo4 de 12v -200ah y inversor de 12v-6000w"
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": "precio180"
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": 180.0
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": "180 usd"
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": "USD"
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": "La Habana"
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": "2026-10-27T11:53:36Z"
+    },
+    "power_w": {
+      "tipo": "decimal",
+      "unidad": "W",
+      "valor": 6000.0
+    },
+    "inverter_type": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "hibrido",
+        "off-grid",
+        "on-grid",
+        "microinversor",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "desconocido"
+    },
+    "output_voltage": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "110V",
+        "220V",
+        "110V/220V",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "desconocido"
+    },
+    "mppt": {
+      "tipo": "booleano",
+      "valor": false
+    }
+  }
+}

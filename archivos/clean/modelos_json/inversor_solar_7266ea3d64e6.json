@@ -1,0 +1,95 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": "https://bembete.com/detalles/sistema-solar-todo-en-uno-marca-infinity-solar-caracteristicas-2762213327528691fb"
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": "Bembete (bembete.com)"
+    }
+  },
+  "tipo_oferta": "inversor_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": "https://bembete.com/detalles/sistema-solar-todo-en-uno-marca-infinity-solar-caracteristicas-2762213327528691fb#offer"
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": "Sistema solar Infinity Solar"
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": "Infinity Solar"
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": "Sistema"
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": 3800.0
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": "3800 usd"
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": "USD"
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": "La Habana"
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": "2026-10-25T22:23:07Z"
+    },
+    "power_w": {
+      "tipo": "decimal",
+      "unidad": "W",
+      "valor": 6000.0
+    },
+    "inverter_type": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "hibrido",
+        "off-grid",
+        "on-grid",
+        "microinversor",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "desconocido"
+    },
+    "output_voltage": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "110V",
+        "220V",
+        "110V/220V",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "220V"
+    },
+    "mppt": {
+      "tipo": "booleano",
+      "valor": false
+    }
+  }
+}

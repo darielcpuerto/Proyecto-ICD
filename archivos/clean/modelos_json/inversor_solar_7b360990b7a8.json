@@ -1,0 +1,95 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": "https://bembete.com/detalles/otra-gran-oferta-solar-para-tu-hogar-quieres-4018478061642791fb"
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": "Bembete (bembete.com)"
+    }
+  },
+  "tipo_oferta": "inversor_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": "https://bembete.com/detalles/otra-gran-oferta-solar-para-tu-hogar-quieres-4018478061642791fb#offer"
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": "Sistema solar TBSOLARO de 10 kW"
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": "Sistema"
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": 7600.0
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": "7600 usd"
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": "USD"
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": "La Habana"
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": "2026-10-26T10:27:08Z"
+    },
+    "power_w": {
+      "tipo": "decimal",
+      "unidad": "W",
+      "valor": 10000.0
+    },
+    "inverter_type": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "hibrido",
+        "off-grid",
+        "on-grid",
+        "microinversor",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "hibrido"
+    },
+    "output_voltage": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "110V",
+        "220V",
+        "110V/220V",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "220V"
+    },
+    "mppt": {
+      "tipo": "booleano",
+      "valor": false
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": "https://bembete.com/detalles/wa-me-5358419237-tenemos-paneles-de-450w-bifasial-500w-bifasiall-545w-bifasial-2297582257453437fb"
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": "Bembete (bembete.com)"
+    }
+  },
+  "tipo_oferta": "panel_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": "https://bembete.com/detalles/wa-me-5358419237-tenemos-paneles-de-450w-bifasial-500w-bifasiall-545w-bifasial-2297582257453437fb#offer"
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": "Paneles solares y bases"
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": "bases"
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": null
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": "1 CUP"
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": "CUP"
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": "La Habana"
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": "2026-10-26T14:50:46Z"
+    },
+    "power_w": {
+      "tipo": "decimal",
+      "unidad": "W",
+      "valor": 450.0
+    },
+    "panel_type": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "monocristalino",
+        "policristalino",
+        "monocristalino bifacial",
+        "bifacial",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "desconocido"
+    }
+  }
+}

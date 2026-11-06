@@ -1,0 +1,233 @@
+{
+  "resumen": {
+    "total_demanda": 35,
+    "total_oferta": 224,
+    "fecha_analisis": "2026-11-06"
+  },
+  "cruce_ubicacion": {
+    "demanda_municipios": {
+      "Boyeros": 12,
+      "Centro Habana": 4,
+      "Habana del Este": 2,
+      "San Miguel del Padrón": 1,
+      "Arroyo Naranjo": 1,
+      "Plaza de la Revolución": 8,
+      "Diez de Octubre": 4,
+      "Marianao": 2,
+      "Playa": 1
+    },
+    "oferta_ubicaciones": {
+      "La Habana": 197,
+      "Isla De La Juventud": 27
+    },
+    "analisis": "Todos los municipios del cuestionario son de La Habana provincia. Hay 197 ofertas en La Habana y 27 en Isla de la Juventud. La cobertura geográfica de oferta coincide con la demanda concentrada en La Habana."
+  },
+  "cruce_equipos": {
+    "demanda_equipos": {
+      "Refrigeración": 19,
+      "Cocción": 12,
+      "Comunicación": 3,
+      "Climatización": 1
+    },
+    "oferta_por_tipo": {
+      "bateria_solar": 60,
+      "inversor_solar": 59,
+      "kit_solar": 19,
+      "panel_solar": 86
+    },
+    "mapeo": {
+      "Refrigeración": "Necesita inversor + batería para nevera/refrigerador",
+      "Cocción": "Necesita inversor de alta potencia + batería",
+      "Comunicación": "Necesita inversor + panel para cargar equipos",
+      "Climatización": "Necesita inversor de alta potencia + batería grande"
+    },
+    "brecha": {
+      "Refrigeración": {
+        "demanda": 19,
+        "oferta_disponible": 138,
+        "tipos_oferta": [
+          "inversor_solar",
+          "bateria_solar",
+          "kit_solar"
+        ],
+        "ratio": 7.26
+      },
+      "Cocción": {
+        "demanda": 12,
+        "oferta_disponible": 138,
+        "tipos_oferta": [
+          "inversor_solar",
+          "bateria_solar",
+          "kit_solar"
+        ],
+        "ratio": 11.5
+      },
+      "Comunicación": {
+        "demanda": 3,
+        "oferta_disponible": 205,
+        "tipos_oferta": [
+          "inversor_solar",
+          "bateria_solar",
+          "panel_solar"
+        ],
+        "ratio": 68.33
+      },
+      "Climatización": {
+        "demanda": 1,
+        "oferta_disponible": 138,
+        "tipos_oferta": [
+          "inversor_solar",
+          "bateria_solar",
+          "kit_solar"
+        ],
+        "ratio": 138.0
+      }
+    }
+  },
+  "cruce_apagones": {
+    "demanda_apagones": {
+      "12-24 Horas al día": 19,
+      "6-12 Horas al día": 7,
+      "3-6 Horas al día": 2,
+      "Más de 24 horas": 7
+    },
+    "baterias_con_capacidad": 7,
+    "analisis": {
+      "12-24 Horas al día": {
+        "demanda_personas": 19,
+        "kwh_necesario_min": 10.0,
+        "baterias_disponibles_suficientes": 6,
+        "capacidades_disponibles": [
+          5.12,
+          10.0,
+          15.0,
+          15.0,
+          15.0,
+          5120.0,
+          5120.0
+        ]
+      },
+      "6-12 Horas al día": {
+        "demanda_personas": 7,
+        "kwh_necesario_min": 5.0,
+        "baterias_disponibles_suficientes": 7,
+        "capacidades_disponibles": [
+          5.12,
+          10.0,
+          15.0,
+          15.0,
+          15.0,
+          5120.0,
+          5120.0
+        ]
+      },
+      "3-6 Horas al día": {
+        "demanda_personas": 2,
+        "kwh_necesario_min": 2.0,
+        "baterias_disponibles_suficientes": 7,
+        "capacidades_disponibles": [
+          5.12,
+          10.0,
+          15.0,
+          15.0,
+          15.0,
+          5120.0,
+          5120.0
+        ]
+      },
+      "Más de 24 horas": {
+        "demanda_personas": 7,
+        "kwh_necesario_min": 15.0,
+        "baterias_disponibles_suficientes": 5,
+        "capacidades_disponibles": [
+          5.12,
+          10.0,
+          15.0,
+          15.0,
+          15.0,
+          5120.0,
+          5120.0
+        ]
+      }
+    }
+  },
+  "cruce_precio": {
+    "demanda_acceso": {
+      "No": 15,
+      "Difícil acceso": 14,
+      "Accesible por la ayuda económica": 2,
+      "Relativamente accesible con planificación y ahorro": 2,
+      "Prefiero no responder": 2
+    },
+    "oferta_precios_usd": {
+      "n": 172,
+      "min": 2.0,
+      "max": 34000.0,
+      "mediano": 380.0
+    },
+    "analisis": {
+      "No": {
+        "personas": 15,
+        "umbral_precio_usd": 500,
+        "ofertas_debajo_umbral": 95,
+        "porcentaje_ofertas_accesibles": 55.2
+      },
+      "Difícil acceso": {
+        "personas": 14,
+        "umbral_precio_usd": 500,
+        "ofertas_debajo_umbral": 95,
+        "porcentaje_ofertas_accesibles": 55.2
+      },
+      "Accesible por la ayuda económica": {
+        "personas": 2,
+        "umbral_precio_usd": 1500,
+        "ofertas_debajo_umbral": 135,
+        "porcentaje_ofertas_accesibles": 78.5
+      },
+      "Relativamente accesible con planificación y ahorro": {
+        "personas": 2,
+        "umbral_precio_usd": 1500,
+        "ofertas_debajo_umbral": 135,
+        "porcentaje_ofertas_accesibles": 78.5
+      },
+      "Prefiero no responder": {
+        "personas": 2,
+        "umbral_precio_usd": 3000,
+        "ofertas_debajo_umbral": 154,
+        "porcentaje_ofertas_accesibles": 89.5
+      }
+    }
+  },
+  "cruce_respaldo": {
+    "demanda_respaldo": {
+      "Ninguno": 17,
+      "Otro": 11,
+      "Baterías con inversor": 2,
+      "Paneles solares; Baterías con inversor": 1,
+      "Paneles solares": 4
+    },
+    "recomendacion_por_respaldo": {
+      "Ninguno": "Kit solar completo (panel + inversor + batería)",
+      "Baterías con inversor": "Panel solar adicional para cargar baterías",
+      "Paneles solares": "Batería o inversor para complementar",
+      "Paneles solares; Baterías con inversor": "Expansión de capacidad o kit adicional",
+      "Otro": "Evaluación personalizada"
+    }
+  },
+  "cruce_sector": {
+    "demanda_sector": {
+      "Estatal": 14,
+      "Empresa privada": 10,
+      "TCP": 5,
+      "Ninguno": 5,
+      "Otro": 1
+    },
+    "umbral_sugerido_usd": {
+      "Estatal": 1000,
+      "Empresa privada": 1500,
+      "TCP": 500,
+      "Ninguno": 300,
+      "Otro": 800
+    }
+  }
+}

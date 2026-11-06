@@ -1,0 +1,95 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": "https://bembete.com/detalles/tengo-2-bateria-lifepo4-1980-w-nuevas-en-su-caja-2658832657900759fb"
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": "Bembete (bembete.com)"
+    }
+  },
+  "tipo_oferta": "bateria_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": "https://bembete.com/detalles/tengo-2-bateria-lifepo4-1980-w-nuevas-en-su-caja-2658832657900759fb#offer"
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": "Baterías Lifepo4 1980W nuevas"
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": "precio600"
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": 600.0
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": "600 usd"
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": "USD"
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": "Isla De La Juventud"
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": "2026-10-27T17:41:30Z"
+    },
+    "capacity_kwh": {
+      "tipo": "decimal",
+      "unidad": "kWh",
+      "valor": null
+    },
+    "capacity_ah": {
+      "tipo": "decimal",
+      "unidad": "Ah",
+      "valor": null
+    },
+    "voltage_v": {
+      "tipo": "decimal",
+      "unidad": "V",
+      "valor": null
+    },
+    "battery_technology": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "LiFePO4",
+        "litio",
+        "AGM",
+        "gel",
+        "plomo-acido",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "litio"
+    },
+    "cycles": {
+      "tipo": "entero",
+      "valor": null
+    }
+  }
+}

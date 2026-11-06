@@ -1,0 +1,95 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": "https://bembete.com/detalles/se-vende-6-baterias-de-kid-de-gel-12v-x-3644122729074164fb"
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": "Bembete (bembete.com)"
+    }
+  },
+  "tipo_oferta": "bateria_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": "https://bembete.com/detalles/se-vende-6-baterias-de-kid-de-gel-12v-x-3644122729074164fb#offer"
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": "baterías de gel 12V x 58A 72V"
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": "Kid"
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": "350usd"
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": 350.0
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": "350 usd"
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": "USD"
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": "Isla De La Juventud"
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": "2026-10-25T03:26:50Z"
+    },
+    "capacity_kwh": {
+      "tipo": "decimal",
+      "unidad": "kWh",
+      "valor": null
+    },
+    "capacity_ah": {
+      "tipo": "decimal",
+      "unidad": "Ah",
+      "valor": null
+    },
+    "voltage_v": {
+      "tipo": "decimal",
+      "unidad": "V",
+      "valor": 12.0
+    },
+    "battery_technology": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "LiFePO4",
+        "litio",
+        "AGM",
+        "gel",
+        "plomo-acido",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "gel"
+    },
+    "cycles": {
+      "tipo": "entero",
+      "valor": null
+    }
+  }
+}

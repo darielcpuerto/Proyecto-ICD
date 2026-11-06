@@ -1,0 +1,123 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": "https://bembete.com/detalles/kit-solar-de-12kwh-con-15-kwh-precio-7500-usd-2966123357096472fb"
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": "Bembete (bembete.com)"
+    }
+  },
+  "tipo_oferta": "kit_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": "https://bembete.com/detalles/kit-solar-de-12kwh-con-15-kwh-precio-7500-usd-2966123357096472fb#offer"
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": "Kit Solar de 12kwh"
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": "kwh"
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": 7500.0
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": "7500 usd"
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": "USD"
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": "La Habana"
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": "2026-10-26T00:24:46Z"
+    },
+    "power_w": {
+      "tipo": "decimal",
+      "unidad": "W",
+      "valor": null
+    },
+    "capacity_kwh": {
+      "tipo": "decimal",
+      "unidad": "kWh",
+      "valor": 12.0
+    },
+    "output_voltage": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "110V",
+        "220V",
+        "110V/220V",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "desconocido"
+    },
+    "componentes": {
+      "tipo": "lista<objeto>",
+      "valor": null,
+      "campos_item": {
+        "tipo_componente": {
+          "tipo": "texto",
+          "valores_permitidos": [
+            "panel",
+            "inversor",
+            "bateria",
+            "controlador",
+            "accesorio"
+          ],
+          "valor": null
+        },
+        "product_name": {
+          "tipo": "texto",
+          "valor": null
+        },
+        "brand": {
+          "tipo": "texto",
+          "valor": null
+        },
+        "quantity": {
+          "tipo": "entero",
+          "valor": null
+        },
+        "power_w": {
+          "tipo": "decimal",
+          "unidad": "W",
+          "valor": null
+        },
+        "capacity_kwh": {
+          "tipo": "decimal",
+          "unidad": "kWh",
+          "valor": null
+        }
+      }
+    }
+  }
+}

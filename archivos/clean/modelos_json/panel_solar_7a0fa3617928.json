@@ -1,0 +1,80 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": "https://bembete.com/detalles/paneles-solares-de-620w-marca-seg-solar-bifaciales-precio-150-2357129768432114fb"
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": "Bembete (bembete.com)"
+    }
+  },
+  "tipo_oferta": "panel_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": "https://bembete.com/detalles/paneles-solares-de-620w-marca-seg-solar-bifaciales-precio-150-2357129768432114fb#offer"
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": "Paneles Solares Seg Solar 620w"
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": "Seg"
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": "precio145"
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": 145.0
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": "145 usd"
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": "USD"
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": "La Habana"
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": "2026-10-26T12:45:10Z"
+    },
+    "power_w": {
+      "tipo": "decimal",
+      "unidad": "W",
+      "valor": 620.0
+    },
+    "panel_type": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "monocristalino",
+        "policristalino",
+        "monocristalino bifacial",
+        "bifacial",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "bifacial"
+    }
+  }
+}

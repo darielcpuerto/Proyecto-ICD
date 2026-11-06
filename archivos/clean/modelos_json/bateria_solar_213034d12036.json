@@ -1,0 +1,95 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": "https://bembete.com/detalles/gran-oferta-de-baterias-lifepo4-premium-asegura-el-2661588377602849fb"
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": "Bembete (bembete.com)"
+    }
+  },
+  "tipo_oferta": "bateria_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": "https://bembete.com/detalles/gran-oferta-de-baterias-lifepo4-premium-asegura-el-2661588377602849fb#offer"
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": "Baterias LiFePO4 premium"
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": "Poeruni"
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": "precio260"
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": 260.0
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": "260 usd"
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": "USD"
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": "La Habana"
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": "2026-10-26T18:34:45Z"
+    },
+    "capacity_kwh": {
+      "tipo": "decimal",
+      "unidad": "kWh",
+      "valor": null
+    },
+    "capacity_ah": {
+      "tipo": "decimal",
+      "unidad": "Ah",
+      "valor": 200.0
+    },
+    "voltage_v": {
+      "tipo": "decimal",
+      "unidad": "V",
+      "valor": 12.8
+    },
+    "battery_technology": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "LiFePO4",
+        "litio",
+        "AGM",
+        "gel",
+        "plomo-acido",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "litio"
+    },
+    "cycles": {
+      "tipo": "entero",
+      "valor": null
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": "https://bembete.com/detalles/panel-solar-ja-solar-510w-bifacial-ja-solar-deepblue-4-0-1442547413925133fb"
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": "Bembete (bembete.com)"
+    }
+  },
+  "tipo_oferta": "panel_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": "https://bembete.com/detalles/panel-solar-ja-solar-510w-bifacial-ja-solar-deepblue-4-0-1442547413925133fb#offer"
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": "Panel solar Ja Solar 510W bifacial"
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": "Ja Solar"
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": "precio210"
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": 210.0
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": "210 usd"
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": "USD"
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": "La Habana"
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": "2026-10-25T18:00:43Z"
+    },
+    "power_w": {
+      "tipo": "decimal",
+      "unidad": "W",
+      "valor": 510.0
+    },
+    "panel_type": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "monocristalino",
+        "policristalino",
+        "monocristalino bifacial",
+        "bifacial",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "bifacial"
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": "https://bembete.com/detalles/https-wa-me-5352711304-pinchando-el-link-directo-a-mi-whatsapp-bateria-de-2688360581580256fb"
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": "Bembete (bembete.com)"
+    }
+  },
+  "tipo_oferta": "bateria_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": "https://bembete.com/detalles/https-wa-me-5352711304-pinchando-el-link-directo-a-mi-whatsapp-bateria-de-2688360581580256fb#offer"
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": "Batería 12v x 100ah, Convertidor 1500watts, Cable macho"
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": "1500watts"
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": null
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": "1 CUP"
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": "CUP"
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": "La Habana"
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": "2026-10-26T14:48:31Z"
+    },
+    "capacity_kwh": {
+      "tipo": "decimal",
+      "unidad": "kWh",
+      "valor": null
+    },
+    "capacity_ah": {
+      "tipo": "decimal",
+      "unidad": "Ah",
+      "valor": 100.0
+    },
+    "voltage_v": {
+      "tipo": "decimal",
+      "unidad": "V",
+      "valor": 12.0
+    },
+    "battery_technology": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "LiFePO4",
+        "litio",
+        "AGM",
+        "gel",
+        "plomo-acido",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "desconocido"
+    },
+    "cycles": {
+      "tipo": "entero",
+      "valor": null
+    }
+  }
+}

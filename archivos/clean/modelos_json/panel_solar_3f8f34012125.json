@@ -1,0 +1,80 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": "https://bembete.com/detalles/paneles-solares-bifaciales-a-solo-270-usd-3327882207408838fb"
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": "Bembete (bembete.com)"
+    }
+  },
+  "tipo_oferta": "panel_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": "https://bembete.com/detalles/paneles-solares-bifaciales-a-solo-270-usd-3327882207408838fb#offer"
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": "Paneles solares bifaciales"
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": "precio270"
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": 270.0
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": "270 usd"
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": "USD"
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": "Isla De La Juventud"
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": "2026-10-27T18:12:53Z"
+    },
+    "power_w": {
+      "tipo": "decimal",
+      "unidad": "W",
+      "valor": null
+    },
+    "panel_type": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "monocristalino",
+        "policristalino",
+        "monocristalino bifacial",
+        "bifacial",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "bifacial"
+    }
+  }
+}

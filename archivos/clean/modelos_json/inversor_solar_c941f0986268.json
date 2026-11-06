@@ -1,0 +1,95 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": "https://bembete.com/detalles/inversor-must-6k-110-220-aceptamos-todo-tipo-de-pagos-mlc-usd-euros-mn-tarjeta-29099203199763422fb"
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": "Bembete (bembete.com)"
+    }
+  },
+  "tipo_oferta": "inversor_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": "https://bembete.com/detalles/inversor-must-6k-110-220-aceptamos-todo-tipo-de-pagos-mlc-usd-euros-mn-tarjeta-29099203199763422fb#offer"
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": "Inversor must 6k 110/220"
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": "Must"
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": null
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": "1 CUP"
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": "CUP"
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": "La Habana"
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": "2026-10-26T12:25:03Z"
+    },
+    "power_w": {
+      "tipo": "decimal",
+      "unidad": "W",
+      "valor": null
+    },
+    "inverter_type": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "hibrido",
+        "off-grid",
+        "on-grid",
+        "microinversor",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "desconocido"
+    },
+    "output_voltage": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "110V",
+        "220V",
+        "110V/220V",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "desconocido"
+    },
+    "mppt": {
+      "tipo": "booleano",
+      "valor": false
+    }
+  }
+}

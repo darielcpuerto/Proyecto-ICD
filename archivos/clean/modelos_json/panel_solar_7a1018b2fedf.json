@@ -1,0 +1,80 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": "https://bembete.com/detalles/paneles-solares-longi-620w-calidad-que-inspira-confianza-4048754548594283fb"
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": "Bembete (bembete.com)"
+    }
+  },
+  "tipo_oferta": "panel_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": "https://bembete.com/detalles/paneles-solares-longi-620w-calidad-que-inspira-confianza-4048754548594283fb#offer"
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": "Paneles solares LONGI 620W"
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": "Longi"
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": null
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": "1 CUP"
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": "CUP"
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": "La Habana"
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": "2026-10-29T10:25:35Z"
+    },
+    "power_w": {
+      "tipo": "decimal",
+      "unidad": "W",
+      "valor": 620.0
+    },
+    "panel_type": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "monocristalino",
+        "policristalino",
+        "monocristalino bifacial",
+        "bifacial",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "desconocido"
+    }
+  }
+}

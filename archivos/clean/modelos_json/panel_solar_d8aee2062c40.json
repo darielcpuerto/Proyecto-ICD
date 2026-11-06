@@ -1,0 +1,80 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": "https://bembete.com/detalles/panel-solar-bifacial-skymax-620w-253-53-59119875-si-28774290532262239fb"
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": "Bembete (bembete.com)"
+    }
+  },
+  "tipo_oferta": "panel_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": "https://bembete.com/detalles/panel-solar-bifacial-skymax-620w-253-53-59119875-si-28774290532262239fb#offer"
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": "Panel Solar Bifacial SKYMAX 620W"
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": "Ecoflow"
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": "precio253"
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": 253.0
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": "253 cup"
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": "CUP"
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": "La Habana"
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": "2026-10-26T10:17:51Z"
+    },
+    "power_w": {
+      "tipo": "decimal",
+      "unidad": "W",
+      "valor": 620.0
+    },
+    "panel_type": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "monocristalino",
+        "policristalino",
+        "monocristalino bifacial",
+        "bifacial",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "bifacial"
+    }
+  }
+}

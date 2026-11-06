@@ -1,0 +1,80 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": "https://bembete.com/detalles/llegaron-los-combos-contacte-al-59656893-panel-de-540w-cable-xt60i-de-2508942783190145fb"
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": "Bembete (bembete.com)"
+    }
+  },
+  "tipo_oferta": "panel_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": "https://bembete.com/detalles/llegaron-los-combos-contacte-al-59656893-panel-de-540w-cable-xt60i-de-2508942783190145fb#offer"
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": "Kits y paneles solares Ecoflow"
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": "Ecoflow"
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": "960usd"
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": 45.0
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": "45 usd"
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": "USD"
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": "La Habana"
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": "2026-10-27T15:40:24Z"
+    },
+    "power_w": {
+      "tipo": "decimal",
+      "unidad": "W",
+      "valor": 540.0
+    },
+    "panel_type": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "monocristalino",
+        "policristalino",
+        "monocristalino bifacial",
+        "bifacial",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "desconocido"
+    }
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": "https://bembete.com/detalles/kit-solar-sumry-4-kw-4-baterias-de-3286441228411556fb"
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": "Bembete (bembete.com)"
+    }
+  },
+  "tipo_oferta": "kit_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": "https://bembete.com/detalles/kit-solar-sumry-4-kw-4-baterias-de-3286441228411556fb#offer"
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": "Kit solar SUMRY 4 KW"
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": "Sumry"
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": 2000.0
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": "2000 usd"
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": "USD"
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": "Isla De La Juventud"
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": "2026-10-26T22:51:46Z"
+    },
+    "power_w": {
+      "tipo": "decimal",
+      "unidad": "W",
+      "valor": 4000.0
+    },
+    "capacity_kwh": {
+      "tipo": "decimal",
+      "unidad": "kWh",
+      "valor": null
+    },
+    "output_voltage": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "110V",
+        "220V",
+        "110V/220V",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "desconocido"
+    },
+    "componentes": {
+      "tipo": "lista<objeto>",
+      "valor": null,
+      "campos_item": {
+        "tipo_componente": {
+          "tipo": "texto",
+          "valores_permitidos": [
+            "panel",
+            "inversor",
+            "bateria",
+            "controlador",
+            "accesorio"
+          ],
+          "valor": null
+        },
+        "product_name": {
+          "tipo": "texto",
+          "valor": null
+        },
+        "brand": {
+          "tipo": "texto",
+          "valor": null
+        },
+        "quantity": {
+          "tipo": "entero",
+          "valor": null
+        },
+        "power_w": {
+          "tipo": "decimal",
+          "unidad": "W",
+          "valor": null
+        },
+        "capacity_kwh": {
+          "tipo": "decimal",
+          "unidad": "kWh",
+          "valor": null
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": "https://bembete.com/detalles/panel-solar-bifacial-marca-solar-ever-ve-precio-2971490529893088fb"
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": "Bembete (bembete.com)"
+    }
+  },
+  "tipo_oferta": "panel_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": "https://bembete.com/detalles/panel-solar-bifacial-marca-solar-ever-ve-precio-2971490529893088fb#offer"
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": "Panel Solar Bifacial Marca Solar Ever"
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": "Solarever"
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": "precio160"
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": 160.0
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": "160 usd"
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": "USD"
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": "La Habana"
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": "2026-10-26T12:47:38Z"
+    },
+    "power_w": {
+      "tipo": "decimal",
+      "unidad": "W",
+      "valor": 450.0
+    },
+    "panel_type": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "monocristalino",
+        "policristalino",
+        "monocristalino bifacial",
+        "bifacial",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "bifacial"
+    }
+  }
+}

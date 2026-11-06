@@ -1,0 +1,140 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": "https://bembete.com/detalles/ofertas-de-kitt-solares-5401862-kit-solar-inversor-4kw-1848678146244397fb"
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": "Bembete (bembete.com)"
+    }
+  },
+  "tipo_oferta": "kit_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": "https://bembete.com/detalles/ofertas-de-kitt-solares-5401862-kit-solar-inversor-4kw-1848678146244397fb#offer"
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": "Kit solar 6Kw con respaldo en almacenamiento"
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": "telefono5401862"
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": null
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": "1 CUP"
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": "CUP"
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": "Isla De La Juventud"
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": "2026-10-27T18:17:00Z"
+    },
+    "power_w": {
+      "tipo": "decimal",
+      "unidad": "W",
+      "valor": 6000.0
+    },
+    "capacity_kwh": {
+      "tipo": "decimal",
+      "unidad": "kWh",
+      "valor": null
+    },
+    "output_voltage": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "110V",
+        "220V",
+        "110V/220V",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "desconocido"
+    },
+    "componentes": {
+      "tipo": "lista<objeto>",
+      "valor": [
+        {
+          "tipo_componente": "panel",
+          "product_name": null,
+          "brand": null,
+          "quantity": 3,
+          "power_w": null,
+          "capacity_kwh": null
+        },
+        {
+          "tipo_componente": "bateria",
+          "product_name": null,
+          "brand": null,
+          "quantity": 2,
+          "power_w": 4000.0,
+          "capacity_kwh": null
+        }
+      ],
+      "campos_item": {
+        "tipo_componente": {
+          "tipo": "texto",
+          "valores_permitidos": [
+            "panel",
+            "inversor",
+            "bateria",
+            "controlador",
+            "accesorio"
+          ],
+          "valor": null
+        },
+        "product_name": {
+          "tipo": "texto",
+          "valor": null
+        },
+        "brand": {
+          "tipo": "texto",
+          "valor": null
+        },
+        "quantity": {
+          "tipo": "entero",
+          "valor": null
+        },
+        "power_w": {
+          "tipo": "decimal",
+          "unidad": "W",
+          "valor": null
+        },
+        "capacity_kwh": {
+          "tipo": "decimal",
+          "unidad": "kWh",
+          "valor": null
+        }
+      }
+    }
+  }
+}

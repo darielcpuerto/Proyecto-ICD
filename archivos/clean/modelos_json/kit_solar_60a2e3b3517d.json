@@ -1,0 +1,123 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": "https://bembete.com/detalles/inversor-must-inversor-de-3kw-24v-110v-y-220v-inversor-1442546360591905fb"
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": "Bembete (bembete.com)"
+    }
+  },
+  "tipo_oferta": "kit_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": "https://bembete.com/detalles/inversor-must-inversor-de-3kw-24v-110v-y-220v-inversor-1442546360591905fb#offer"
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": "Inversores y baterías Felicitysolar e Infinisolar"
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": "Infinisolar"
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": "Felicitysolar"
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": null
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": "1 CUP"
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": "CUP"
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": "La Habana"
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": "2026-10-25T17:58:50Z"
+    },
+    "power_w": {
+      "tipo": "decimal",
+      "unidad": "W",
+      "valor": 3000.0
+    },
+    "capacity_kwh": {
+      "tipo": "decimal",
+      "unidad": "kWh",
+      "valor": null
+    },
+    "output_voltage": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "110V",
+        "220V",
+        "110V/220V",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "220V"
+    },
+    "componentes": {
+      "tipo": "lista<objeto>",
+      "valor": null,
+      "campos_item": {
+        "tipo_componente": {
+          "tipo": "texto",
+          "valores_permitidos": [
+            "panel",
+            "inversor",
+            "bateria",
+            "controlador",
+            "accesorio"
+          ],
+          "valor": null
+        },
+        "product_name": {
+          "tipo": "texto",
+          "valor": null
+        },
+        "brand": {
+          "tipo": "texto",
+          "valor": null
+        },
+        "quantity": {
+          "tipo": "entero",
+          "valor": null
+        },
+        "power_w": {
+          "tipo": "decimal",
+          "unidad": "W",
+          "valor": null
+        },
+        "capacity_kwh": {
+          "tipo": "decimal",
+          "unidad": "kWh",
+          "valor": null
+        }
+      }
+    }
+  }
+}

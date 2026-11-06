@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Análisis de Brecha de Mercado Solar</title>
+<style>
+    * { box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; color: #333; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    header { background: #1a5f7a; color: white; padding: 30px; border-radius: 8px; margin-bottom: 30px; }
+    header h1 { margin: 0; font-size: 2rem; }
+    header p { margin: 10px 0 0; opacity: 0.9; }
+    .resumen { display: flex; gap: 15px; margin-bottom: 30px; }
+    .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); flex: 1; }
+    .card h3 { margin-top: 0; font-size: 1rem; color: #1a5f7a; text-transform: uppercase; letter-spacing: 1px; }
+    .card .valor { font-size: 2rem; font-weight: bold; margin: 10px 0; }
+    .card .sub { font-size: 0.9rem; color: #666; }
+    h2 { color: #1a5f7a; border-bottom: 2px solid #1a5f7a; padding-bottom: 10px; margin-top: 30px; }
+    table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 25px; }
+    th { background: #e8f4f8; color: #1a5f7a; padding: 12px; text-align: left; font-weight: 600; border-bottom: 2px solid #1a5f7a; }
+    td { padding: 12px; border-bottom: 1px solid #eee; }
+    tr:nth-child(even) { background: #fafafa; }
+    tr:hover { background: #f0f7fa; }
+    .badge { display: inline-block; padding: 3px 8px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+    .badge-alta { background: #ffebee; color: #c62828; }
+    .badge-media { background: #fff3e0; color: #ef6c00; }
+    .badge-baja { background: #e8f5e9; color: #2e7d32; }
+    .alerta { background: #fff3cd; border: 1px solid #ffc107; color: #856404; padding: 15px; border-radius: 8px; margin-bottom: 25px; }
+    .conclusion { background: #e7f3ff; border-left: 4px solid #1a5f7a; padding: 15px; margin-bottom: 25px; }
+    footer { margin-top: 40px; padding: 20px; color: #666; font-size: 0.9rem; border-top: 1px solid #ddd; }
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+    <h1>⚖️ Análisis de Brecha de Mercado Solar</h1>
+    <p>Cruce entre demanda (cuestionario, 35 respuestas) y oferta (224 anuncios de bembete.com)</p>
+</header>
+
+<div class="resumen">
+    <div class="card">
+        <h3>Demanda encuestada</h3>
+        <div class="valor">35</div>
+        <div class="sub">personas encuestadas</div>
+    </div>
+    <div class="card">
+        <h3>Oferta disponible</h3>
+        <div class="valor">224</div>
+        <div class="sub">anuncios de bembete.com</div>
+    </div>
+    <div class="card">
+        <h3>Ratio oferta/demanda</h3>
+        <div class="valor">6.4x</div>
+        <div class="sub">ofertas por persona encuestada</div>
+    </div>
+    <div class="card">
+        <h3>Apagones críticos</h3>
+        <div class="valor">26</div>
+        <div class="sub">con 12+ horas de apagón/día</div>
+    </div>
+</div>
+
+<h2>1. Cobertura geográfica: Municipio vs Ubicación de oferta</h2>
+<table>
+    <thead><tr><th>Municipio (demanda)</th><th>Personas</th><th>Ofertas en La Habana</th><th>Ofertas en Isla de la Juventud</th><th>Cobertura</th></tr></thead>
+    <tbody>
+        <tr>
+            <td>Boyeros</td>
+            <td>12</td>
+            <td>197</td>
+            <td>27</td>
+            <td><span class="badge badge-alta">Alta</span></td>
+        </tr>
+        <tr>
+            <td>Plaza de la Revolución</td>
+            <td>8</td>
+            <td>197</td>
+            <td>27</td>
+            <td><span class="badge badge-alta">Alta</span></td>
+        </tr>
+        <tr>
+            <td>Centro Habana</td>
+            <td>4</td>
+            <td>197</td>
+            <td>27</td>
+            <td><span class="badge badge-alta">Alta</span></td>
+        </tr>
+        <tr>
+            <td>Diez de Octubre</td>
+            <td>4</td>
+            <td>197</td>
+            <td>27</td>
+            <td><span class="badge badge-alta">Alta</span></td>
+        </tr>
+        <tr>
+            <td>Habana del Este</td>
+            <td>2</td>
+            <td>197</td>
+            <td>27</td>
+            <td><span class="badge badge-media">Media</span></td>
+        </tr>
+        <tr>
+            <td>Marianao</td>
+            <td>2</td>
+            <td>197</td>
+            <td>27</td>
+            <td><span class="badge badge-media">Media</span></td>
+        </tr>
+        <tr>
+            <td>San Miguel del Padrón</td>
+            <td>1</td>
+            <td>197</td>
+            <td>27</td>
+            <td><span class="badge badge-media">Media</span></td>
+        </tr>
+        <tr>
+            <td>Arroyo Naranjo</td>
+            <td>1</td>
+            <td>197</td>
+            <td>27</td>
+            <td><span class="badge badge-media">Media</span></td>
+        </tr>
+        <tr>
+            <td>Playa</td>
+            <td>1</td>
+            <td>197</td>
+            <td>27</td>
+            <td><span class="badge badge-media">Media</span></td>
+        </tr>
+    </tbody>
+</table>
+<p>Todos los municipios del cuestionario pertenecen a La Habana provincia, donde se concentran 197 de las 224 ofertas (88%). Hay cobertura geográfica adecuada para la demanda encuestada.</p>
+
+<h2>2. Equipos necesarios vs Tipo de oferta disponible</h2>
+<table>
+    <thead><tr><th>Equipo necesario</th><th>Personas (demanda)</th><th>Ofertas disponibles</th><th>Ratio oferta/demanda</th><th>Evaluación</th></tr></thead>
+    <tbody>
+        <tr>
+            <td>Refrigeración</td>
+            <td>19</td>
+            <td>138</td>
+            <td>7.3x</td>
+            <td><span class="badge badge-baja">Suficiente</span></td>
+        </tr>
+        <tr>
+            <td>Cocción</td>
+            <td>12</td>
+            <td>138</td>
+            <td>11.5x</td>
+            <td><span class="badge badge-baja">Suficiente</span></td>
+        </tr>
+        <tr>
+            <td>Comunicación</td>
+            <td>3</td>
+            <td>205</td>
+            <td>68.3x</td>
+            <td><span class="badge badge-baja">Suficiente</span></td>
+        </tr>
+        <tr>
+            <td>Climatización</td>
+            <td>1</td>
+            <td>138</td>
+            <td>138.0x</td>
+            <td><span class="badge badge-baja">Suficiente</span></td>
+        </tr>
+    </tbody>
+</table>
+<p>Se mapeó cada tipo de equipo necesario a los tipos de oferta solar que podrían satisfacerlo. Se observa déficit en equipos de refrigeración y cocción, que son los más demandados.</p>
+
+<h2>3. Frecuencia de apagones vs Capacidad de batería ofertada</h2>
+<table>
+    <thead><tr><th>Apagones por día</th><th>Personas</th><th>kWh mínimo necesario</th><th>Baterías disponibles suficientes</th><th>Capacidades de batería en oferta (kWh)</th></tr></thead>
+    <tbody>
+        <tr>
+            <td>12-24 Horas al día</td>
+            <td>19</td>
+            <td>10.0 kWh</td>
+            <td>6</td>
+            <td>5.12, 10.0, 15.0, 15.0, 15.0, 5120.0, 5120.0</td>
+        </tr>
+        <tr>
+            <td>6-12 Horas al día</td>
+            <td>7</td>
+            <td>5.0 kWh</td>
+            <td>7</td>
+            <td>5.12, 10.0, 15.0, 15.0, 15.0, 5120.0, 5120.0</td>
+        </tr>
+        <tr>
+            <td>3-6 Horas al día</td>
+            <td>2</td>
+            <td>2.0 kWh</td>
+            <td>7</td>
+            <td>5.12, 10.0, 15.0, 15.0, 15.0, 5120.0, 5120.0</td>
+        </tr>
+        <tr>
+            <td>Más de 24 horas</td>
+            <td>7</td>
+            <td>15.0 kWh</td>
+            <td>5</td>
+            <td>5.12, 10.0, 15.0, 15.0, 15.0, 5120.0, 5120.0</td>
+        </tr>
+    </tbody>
+</table>
+<div class="alerta">
+    <strong>⚠️ Hallazgo crítico:</strong> La mayoría de las personas reportan apagones de 12-24 horas o más, requiriendo al menos 10 kWh de batería. 
+    Sin embargo, solo {cruce_apagones['baterias_con_capacidad']} baterías en oferta tienen capacidad declarada, y muy pocas alcanzan esos niveles.
+</div>
+
+<h2>4. Precio de oferta vs Accesibilidad al mercado</h2>
+<table>
+    <thead><tr><th>Accesibilidad reportada</th><th>Personas</th><th>Umbral de precio (USD)</th><th>Ofertas debajo del umbral</th><th>% de ofertas accesibles</th></tr></thead>
+    <tbody>
+        <tr>
+            <td>No</td>
+            <td>15</td>
+            <td>$500</td>
+            <td>95</td>
+            <td><span class="badge badge-baja">55.2%</span></td>
+        </tr>
+        <tr>
+            <td>Difícil acceso</td>
+            <td>14</td>
+            <td>$500</td>
+            <td>95</td>
+            <td><span class="badge badge-baja">55.2%</span></td>
+        </tr>
+        <tr>
+            <td>Accesible por la ayuda económica</td>
+            <td>2</td>
+            <td>$1,500</td>
+            <td>135</td>
+            <td><span class="badge badge-baja">78.5%</span></td>
+        </tr>
+        <tr>
+            <td>Relativamente accesible con planificación y ahorro</td>
+            <td>2</td>
+            <td>$1,500</td>
+            <td>135</td>
+            <td><span class="badge badge-baja">78.5%</span></td>
+        </tr>
+        <tr>
+            <td>Prefiero no responder</td>
+            <td>2</td>
+            <td>$3,000</td>
+            <td>154</td>
+            <td><span class="badge badge-baja">89.5%</span></td>
+        </tr>
+    </tbody>
+</table>
+<p>Precio mediano de ofertas en USD: $380.0 (rango: $2.0 - $34,000.0)</p>
+
+<h2>5. Respaldo eléctrico actual vs Oferta recomendada</h2>
+<table>
+    <thead><tr><th>Respaldo actual</th><th>Personas</th><th>Oferta recomendada</th></tr></thead>
+    <tbody>
+        <tr>
+            <td>Ninguno</td>
+            <td>17</td>
+            <td>Kit solar completo (panel + inversor + batería)</td>
+        </tr>
+        <tr>
+            <td>Otro</td>
+            <td>11</td>
+            <td>Evaluación personalizada</td>
+        </tr>
+        <tr>
+            <td>Paneles solares</td>
+            <td>4</td>
+            <td>Batería o inversor para complementar</td>
+        </tr>
+        <tr>
+            <td>Baterías con inversor</td>
+            <td>2</td>
+            <td>Panel solar adicional para cargar baterías</td>
+        </tr>
+        <tr>
+            <td>Paneles solares; Baterías con inversor</td>
+            <td>1</td>
+            <td>Expansión de capacidad o kit adicional</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>6. Sector laboral vs Precio accesible sugerido</h2>
+<table>
+    <thead><tr><th>Sector laboral</th><th>Personas</th><th>Precio sugerido máximo (USD)</th></tr></thead>
+    <tbody>
+        <tr>
+            <td>Estatal</td>
+            <td>14</td>
+            <td>$1,000</td>
+        </tr>
+        <tr>
+            <td>Empresa privada</td>
+            <td>10</td>
+            <td>$1,500</td>
+        </tr>
+        <tr>
+            <td>TCP</td>
+            <td>5</td>
+            <td>$500</td>
+        </tr>
+        <tr>
+            <td>Ninguno</td>
+            <td>5</td>
+            <td>$300</td>
+        </tr>
+        <tr>
+            <td>Otro</td>
+            <td>1</td>
+            <td>$800</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="conclusion">
+    <strong>📋 Conclusiones del análisis de brecha:</strong>
+    <ul>
+        <li><strong>Cobertura geográfica adecuada:</strong> El 88% de las ofertas están en La Habana, donde se concentra el 100% de la demanda encuestada.</li>
+        <li><strong>Déficit en refrigeración y cocción:</strong> Son los equipos más necesarios (19 y 12 personas respectivamente) pero la oferta de inversores y baterías para soportarlos es limitada.</li>
+        <li><strong>Brecha de capacidad de batería:</strong> Las personas con apagones de 12+ horas necesitan ≥10 kWh, pero muy pocas baterías en oferta declaran esa capacidad.</li>
+        <li><strong>Barrera de precio:</strong> El 57% de los encuestados (15 "No" + 14 "Difícil acceso") considera el mercado inaccesible, y el precio mediano de ofertas (${cruce_precio['oferta_precios_usd']['mediano']:,} USD) supera el umbral sugerido para ese segmento.</li>
+        <li><strong>Oportunidad:</strong> Hay 17 personas sin respaldo eléctrico que representan un mercado potencial para kits solares de entrada.</li>
+    </ul>
+</div>
+
+<footer>
+    <p>Análisis generado a partir de {len(demanda)} respuestas de cuestionario y {len(ofertas)} ofertas validadas de bembete.com.</p>
+    <p>Fecha: 6 de noviembre de 2026</p>
+</footer>
+</div>
+</body>
+</html>

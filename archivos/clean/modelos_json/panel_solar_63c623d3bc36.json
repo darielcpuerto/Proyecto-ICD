@@ -1,0 +1,80 @@
+{
+  "pagina": {
+    "url": {
+      "tipo": "texto (URL)",
+      "valor": "https://bembete.com/detalles/oferta-panel-solar-marca-longi-de-615-w-solo-2195703731026274fb"
+    },
+    "fuente_nombre": {
+      "tipo": "texto",
+      "valor": "Bembete (bembete.com)"
+    }
+  },
+  "tipo_oferta": "panel_solar",
+  "oferta": {
+    "oferta_id": {
+      "tipo": "texto",
+      "valor": "https://bembete.com/detalles/oferta-panel-solar-marca-longi-de-615-w-solo-2195703731026274fb#offer"
+    },
+    "product_name": {
+      "tipo": "texto",
+      "valor": "Panel Solar Marca Longi de 615 W"
+    },
+    "brand": {
+      "tipo": "texto",
+      "valor": "Longi"
+    },
+    "model": {
+      "tipo": "texto",
+      "valor": "precio155"
+    },
+    "price": {
+      "tipo": "decimal",
+      "valor": 155.0
+    },
+    "price_texto": {
+      "tipo": "texto",
+      "valor": "155 usd"
+    },
+    "currency": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "USD",
+        "CUP",
+        "MLC",
+        "EUR",
+        "otra",
+        "desconocida"
+      ],
+      "valor": "USD"
+    },
+    "location": {
+      "tipo": "texto",
+      "valor": "La Habana"
+    },
+    "installation": {
+      "tipo": "texto",
+      "valor": null
+    },
+    "publication_date": {
+      "tipo": "texto (ISO 8601)",
+      "valor": "2026-10-25T11:44:48Z"
+    },
+    "power_w": {
+      "tipo": "decimal",
+      "unidad": "W",
+      "valor": 615.0
+    },
+    "panel_type": {
+      "tipo": "texto",
+      "valores_permitidos": [
+        "monocristalino",
+        "policristalino",
+        "monocristalino bifacial",
+        "bifacial",
+        "otro",
+        "desconocido"
+      ],
+      "valor": "desconocido"
+    }
+  }
+}
